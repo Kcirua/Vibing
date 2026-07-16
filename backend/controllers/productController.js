@@ -1,5 +1,4 @@
-const db = require("../config/firebase");
-
+const { db } = require("../config/firebase");
 exports.createProduct = async (req, res) => {
 
     try {
