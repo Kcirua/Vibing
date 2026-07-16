@@ -1,3 +1,5 @@
+const orderRoutes = require("./routes/orderRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 const farmerRoutes = require("./routes/farmerRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const express = require("express");
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/farmers", farmerRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/", (req, res) => {
     res.send("Crop Tracker API is running");
