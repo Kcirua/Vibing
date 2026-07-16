@@ -1,25 +1,22 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const productRoutes = require("./routes/productRoutes");
+
 const app = express();
 
-// 1. Beritahu Express bahwa kita menggunakan EJS
-app.set('view engine', 'ejs');
+app.use(cors());
+app.use(express.json());
 
-// 2. KUNCI UTAMA: Arahkan Express untuk mencari file EJS di 'frontend/src/pages'
-app.set('views', path.join(__dirname, '../frontend/src/pages'));
+app.use("/api/products", productRoutes);
 
-// 3. Izinkan Express membaca file statis (CSS/JS Murni/Gambar) di 'frontend/public'
-app.use(express.static(path.join(__dirname, '../frontend/public')));
-
-// Rute untuk halaman utama
-app.get('/', (req, res) => {
-  // Panggil 'Index' (sesuaikan dengan huruf kapital di nama filemu)
-  res.render('Index', { 
-    judul: 'Surplus Market', 
-    peserta: 'Tim Hackathon' 
-  });
+app.get("/", (req, res) => {
+    res.send("Crop Tracker API is running");
 });
 
-app.listen(3000, () => {
-  console.log('Server sukses berjalan di http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
 });
