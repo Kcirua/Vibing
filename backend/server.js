@@ -1,3 +1,5 @@
+const farmerRoutes = require("./routes/farmerRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -10,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
+app.use("/api/farmers", farmerRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.get("/", (req, res) => {
     res.send("Crop Tracker API is running");
