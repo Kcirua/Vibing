@@ -11,210 +11,447 @@
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
+        .theme-green { color: #3b7b24; }
+        .bg-theme-green { background-color: #3b7b24; }
+        .hover-bg-theme-green:hover { background-color: #2f631c; }
+        
+        /* Custom UI Colors matching the reference design */
+        .bg-card-blue { background-color: #F0FAFB; }
+        .bg-card-green { background-color: #F4FBF0; }
+        .bg-weather-main { background-color: #DDF3E4; }
+        .bg-weather-sub { background-color: #F7F9F7; }
     </style>
 </head>
-<body class="bg-[#F6F7F6] text-gray-900 antialiased overflow-x-hidden min-h-screen flex flex-col">
+<body class="text-gray-900 antialiased overflow-x-hidden min-h-screen flex flex-col">
 
-    <!-- NAVBAR (Dashboard Active) -->
-    <nav class="absolute top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
-    <!-- <nav class="bg-[#1A3626] w-full z-50 px-8 py-4 flex justify-between items-center text-white shadow-md"> -->
-        <div class="text-2xl font-bold text-white tracking-tight">AgriHub</div>
+    <!-- TOP BANNER (NAVBAR + HEADER FOTO) -->
+    <div class="relative w-full bg-cover bg-center" 
+         style="background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop');">
         
-        <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
-            <a href="/" class="text-white border-b-2 border-green-400 pb-1">Home</a>
-            <a href="/marketplace" class="hover:text-white transition">Marketplace</a>
-            <a href="#" class="hover:text-white transition">Weather Alerts</a>
-            <a href="#" class="hover:text-white transition">Reports</a>
-        </div>
+        <div class="absolute inset-0 bg-[#1A3626]/80 backdrop-blur-sm"></div>
 
-        <div class="flex items-center gap-4">
-            <span class="text-sm hidden md:block">📍 Tangerang, Banten</span>
-            <div class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center font-bold shadow-inner">
-                👨‍🌾
+        <!-- NAVBAR -->
+        <nav class="relative z-10 w-full px-8 py-6 flex justify-between items-center text-white border-b border-white/10">
+            <div class="text-2xl font-bold tracking-tight">AgriHub</div>
+            <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/marketplace" class="hover:text-white transition">Marketplace</a>
+                <a href="/dashboard" class="text-white border-b-2 border-green-400 pb-1">Dashboard</a>
             </div>
-        </div>
-    </nav>
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-theme-green rounded-full flex items-center justify-center font-bold shadow-inner cursor-pointer text-xl border-2 border-white/20">👨‍🌾</div>
+            </div>
+        </nav>
 
-    <!-- HEADER / WELCOME -->
-    <header class="w-full bg-white border-b border-gray-200 pt-10 pb-8 px-8 md:px-16">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-6">
-            <div>
-                <p class="text-sm font-semibold text-green-600 mb-1">Kamis, 16 Juli 2026</p>
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-900">
-                    Halo, <%= locals.petani || 'Pak Budi' %> 👋
-                </h1>
-                <p class="text-gray-500 mt-2">Berikut adalah ringkasan operasional ladang dan gudangmu hari ini.</p>
+        <!-- HEADER WELCOME -->
+        <header class="relative z-10 w-full pt-10 pb-16 px-8 md:px-16 text-white">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-6">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold">Halo, <span id="farmer-name-display">Juragan</span> 👋</h1>
+                    <p class="text-gray-300 mt-2 text-lg">Pusat kendali operasional ladang dan stok panen.</p>
+                </div>
             </div>
-            <div class="flex gap-3">
-                <button class="bg-gray-100 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-200 transition shadow-sm text-sm">
-                    Unduh Laporan Keuangan
-                </button>
-            </div>
-        </div>
-    </header>
+        </header>
+    </div>
 
     <!-- MAIN DASHBOARD CONTENT -->
-    <main class="max-w-7xl mx-auto w-full px-8 md:px-16 py-10 flex-1 space-y-8">
+    <main class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8 flex-1 relative z-20 bg-white rounded-t-3xl -mt-6 shadow-xl">
         
-        <!-- KPI CARDS (Financial & Inventory Quick Stats) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Revenue -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center gap-5">
-                <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl">💰</div>
-                <div>
-                    <p class="text-sm text-gray-500 font-medium">Pendapatan Bulan Ini</p>
-                    <h3 class="text-2xl font-bold text-gray-900">Rp 4.500.000</h3>
-                </div>
-            </div>
-            <!-- Active Stock -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center gap-5">
-                <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-2xl">📦</div>
-                <div>
-                    <p class="text-sm text-gray-500 font-medium">Total Stok Gudang</p>
-                    <h3 class="text-2xl font-bold text-gray-900">145 Kg</h3>
-                </div>
-            </div>
-            <!-- At Risk -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-red-100 flex items-center gap-5">
-                <div class="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center text-2xl">⚠️</div>
-                <div>
-                    <p class="text-sm text-gray-500 font-medium">Potensi Limbah (Segera Jual)</p>
-                    <h3 class="text-2xl font-bold text-red-600">15 Kg</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- TWO COLUMN LAYOUT -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="flex flex-col lg:flex-row gap-8">
             
-            <!-- LEFT COLUMN (Weather & Market Intelligence) -->
-            <div class="md:col-span-2 space-y-8">
+            <!-- KOLOM KIRI (Summary, Manage Farm, CRUD Inventaris) -->
+            <div class="lg:w-2/3 flex flex-col gap-8">
                 
-                <!-- Smart Weather Action -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 border-l-4 border-l-blue-500">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                        <h3 class="font-bold text-gray-900 text-lg">Prediksi Cuaca & Tindakan</h3>
-                    </div>
-                    <div class="flex flex-col md:flex-row items-center gap-6 bg-blue-50/50 p-5 rounded-2xl border border-blue-100">
-                        <div class="text-center md:text-left min-w-[120px] border-b md:border-b-0 md:border-r border-blue-200 pb-4 md:pb-0 md:pr-6">
-                            <div class="text-5xl mb-2">⛈️</div>
-                            <p class="font-bold text-blue-900 text-xl">26°C</p>
-                            <p class="text-xs text-blue-700 font-medium uppercase tracking-wider">Hujan Petir</p>
-                            <p class="text-xs text-gray-500 mt-1">Besok, 14:00</p>
+                <!-- 1. SUMMARY CARDS -->
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Summary</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-card-blue rounded-3xl p-6 flex justify-between items-center shadow-sm">
+                            <div>
+                                <h3 class="font-bold text-gray-700">Total Jenis Produk</h3>
+                                <p class="text-xs text-gray-400 mt-1">Stok terdaftar di gudang</p>
+                                <div class="mt-4 flex items-baseline gap-1">
+                                    <span id="stat-products" class="text-4xl font-black text-gray-900">0</span>
+                                    <span class="text-sm font-bold text-gray-500">Item</span>
+                                </div>
+                            </div>
+                            <div class="w-16 h-16 rounded-full border-8 border-teal-500 border-l-teal-100 flex items-center justify-center">
+                                <span class="font-bold text-sm text-teal-700">100%</span>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-blue-900 mb-1 flex items-center gap-2">
-                                💡 Spekulasi AI
-                            </h4>
-                            <p class="text-blue-800 text-sm leading-relaxed">
-                                Curah hujan tinggi terdeteksi di area Tangerang besok siang. <b>Tugas prioritas:</b> Panen Sawi Hijau hari ini untuk mencegah pembusukan akar. Tunda penyemprotan pestisida cair karena akan luntur terbawa air hujan.
-                            </p>
-                            <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-blue-700 transition">
-                                + Tambahkan ke Jadwal Pekerja
+
+                        <div class="bg-card-green rounded-3xl p-6 flex justify-between items-center shadow-sm">
+                            <div>
+                                <h3 class="font-bold text-gray-700">Total Pesanan</h3>
+                                <p class="text-xs text-gray-400 mt-1">Permintaan dari marketplace</p>
+                                <div class="mt-4 flex items-baseline gap-1">
+                                    <span id="stat-orders" class="text-4xl font-black text-gray-900">0</span>
+                                    <span class="text-sm font-bold text-gray-500">Orders</span>
+                                </div>
+                            </div>
+                            <div class="w-16 h-16 rounded-full border-8 border-green-500 border-r-green-100 flex items-center justify-center">
+                                <span class="font-bold text-sm text-green-700">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. MANAGE YOUR FARM (Hero Image + Add Button) -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800">Manage your farm</h2>
+                    </div>
+                    <div class="relative w-full h-56 rounded-3xl overflow-hidden shadow-sm group">
+                        <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+                        
+                        <div class="absolute inset-0 p-8 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold text-white mb-2">Musim Panen Tiba!</h3>
+                            <p class="text-white/80 text-sm mb-4 max-w-sm">Perbarui inventaris gudang Anda agar restoran kota bisa langsung memesan hasil bumi Anda.</p>
+                            <button onclick="openProductModal()" class="bg-white text-green-700 w-max px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-green-50 transition text-sm">
+                                + Tambah Hasil Panen (CRUD)
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Market Intelligence (Barang Langka) -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 border-l-4 border-l-purple-500">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-                            <h3 class="font-bold text-gray-900 text-lg">Radar Permintaan Kota</h3>
-                        </div>
-                        <span class="text-xs font-bold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Live Data</span>
-                    </div>
-                    <div class="space-y-4">
-                        <!-- Insight 1 -->
-                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-purple-200 transition">
-                            <div class="text-3xl">🌶️</div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-900">Cabai Rawit Merah</h4>
-                                <p class="text-sm text-gray-500 mt-1">Stok di pasar induk menipis. 4 restoran mencari pasokan darurat hari ini.</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-xs text-gray-400">Tren Harga</p>
-                                <p class="font-bold text-green-600">▲ +15%</p>
-                            </div>
-                        </div>
-                        <!-- Insight 2 -->
-                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-purple-200 transition">
-                            <div class="text-3xl">🧅</div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-900">Bawang Merah</h4>
-                                <p class="text-sm text-gray-500 mt-1">Permintaan stabil tinggi menjelang akhir pekan. Cocok untuk segera dipanen jika sudah matang.</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-xs text-gray-400">Tren Harga</p>
-                                <p class="font-bold text-green-600">▲ +5%</p>
-                            </div>
+                <!-- 3. INVENTORY MANAGEMENT (CRUD Table) -->
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Live Inventory (Database)</h2>
+                    <div class="bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-100 text-sm text-gray-500">
+                                        <th class="p-4 font-semibold">Nama Produk</th>
+                                        <th class="p-4 font-semibold">Kategori</th>
+                                        <th class="p-4 font-semibold">Stok</th>
+                                        <th class="p-4 font-semibold">Harga/kg</th>
+                                        <th class="p-4 font-semibold text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="product-table-body" class="text-sm text-gray-700">
+                                    <tr><td colspan="5" class="p-4 text-center text-gray-400">Memuat data dari database...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- RIGHT COLUMN (Inventory / Gudang) -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <h3 class="font-bold text-gray-900 text-lg">Kondisi Gudang</h3>
+            <!-- KOLOM KANAN (Weather & Financial) -->
+            <div class="lg:w-1/3 flex flex-col gap-8">
+                
+                <!-- 1. LIVE WEATHER FORECAST (API Open-Meteo) -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800">Live Weather</h2>
+                        <span class="text-blue-500 text-sm font-semibold italic">Tangerang</span>
                     </div>
-                    <button class="text-gray-400 hover:text-green-600 transition text-sm font-medium">Lihat Semua</button>
-                </div>
-
-                <div class="space-y-5 flex-1">
-                    <!-- Item Gudang 1 -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-lg">🍅</div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-900">Tomat Cherry</h4>
-                                <p class="text-xs text-green-600 font-medium">Kondisi Segar</p>
+                    
+                    <!-- Today -->
+                    <div class="bg-weather-main rounded-3xl p-6 shadow-sm flex items-center justify-between mb-4">
+                        <div>
+                            <p class="font-bold text-gray-800 mb-1">Hari Ini</p>
+                            <div class="flex items-end gap-1">
+                                <h3 id="weather-current-temp" class="text-4xl font-black text-gray-900">--°</h3>
+                                <span id="weather-current-min" class="text-lg text-gray-500 font-bold mb-1">/--°</span>
                             </div>
+                            <p id="weather-current-desc" class="text-xs text-gray-600 mt-1 font-medium">Memuat satelit...</p>
                         </div>
-                        <p class="font-bold text-gray-900">50 Kg</p>
-                    </div>
-
-                    <!-- Item Gudang 2 (Warning) -->
-                    <div class="flex justify-between items-center p-3 -mx-3 bg-red-50 rounded-xl border border-red-100">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-lg">🥬</div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-900">Sawi Putih</h4>
-                                <p class="text-xs text-red-600 font-medium">Mendekati Busuk (H-1)</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold text-gray-900">15 Kg</p>
-                            <a href="/marketplace" class="text-[10px] bg-red-600 text-white px-2 py-1 rounded font-bold hover:bg-red-700 transition">Diskon Sekarang</a>
-                        </div>
+                        <div id="weather-current-icon" class="text-6xl drop-shadow-md animate-pulse">⏳</div>
                     </div>
 
-                    <!-- Item Gudang 3 -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-lg">🧅</div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-900">Bawang Merah</h4>
-                                <p class="text-xs text-green-600 font-medium">Kondisi Kering (Aman)</p>
-                            </div>
-                        </div>
-                        <p class="font-bold text-gray-900">80 Kg</p>
+                    <!-- Next 4 Days Grid (Diisi oleh JS) -->
+                    <div id="weather-forecast-grid" class="grid grid-cols-2 gap-4">
+                        <div class="col-span-full text-center text-sm text-gray-400 py-4">Mengambil data prakiraan cuaca...</div>
                     </div>
                 </div>
 
-                <button class="mt-6 w-full bg-green-700 text-white py-3 rounded-full text-sm font-semibold hover:bg-green-800 transition shadow-md">
-                    + Input Panen Baru
-                </button>
+                <!-- 2. HARVESTING COST / ASSET ESTIMATION -->
+                <div class="bg-weather-main rounded-3xl p-6 shadow-sm flex flex-col justify-between mt-auto">
+                    <h3 class="font-bold text-gray-800 mb-4">Total Stock Value</h3>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Total Produk</span>
+                        <span id="asset-count" class="text-sm font-bold">0 Item</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-sm text-gray-600">Status</span>
+                        <span class="text-sm font-bold text-green-700">Real-time</span>
+                    </div>
+                    
+                    <hr class="border-green-200 mb-4">
+                    
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Total Asset Estimation</p>
+                            <h3 id="total-asset-value" class="text-2xl lg:text-3xl font-black text-gray-900">Rp 0</h3>
+                        </div>
+                        <div class="w-12 h-12 lg:w-16 lg:h-16 rounded-full border-4 lg:border-8 border-green-600 border-t-lime-300"></div>
+                    </div>
+                </div>
+
             </div>
-
         </div>
     </main>
 
+    <!-- ========================================== -->
+    <!-- MODAL CRUD PRODUCT (CREATE & UPDATE)       -->
+    <!-- ========================================== -->
+    <div id="crud-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative">
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-1">Tambah Panen Baru</h2>
+            <p class="text-sm text-gray-500 mb-6">Masukkan detail hasil panen untuk ditambahkan ke database.</p>
+            
+            <form id="product-form" onsubmit="handleProductSubmit(event)">
+                <input type="hidden" id="prod-id">
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Nama Produk</label>
+                    <input type="text" id="prod-name" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-green-500" placeholder="Cth: Tomat Cherry">
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Stok (Kg)</label>
+                        <input type="number" id="prod-stock" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-green-500" placeholder="Cth: 50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Harga (Rp/Kg)</label>
+                        <input type="number" id="prod-price" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-green-500" placeholder="Cth: 15000">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Kategori</label>
+                    <select id="prod-category" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-green-500">
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Herbs & Spices">Herbs & Spices</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeProductModal()" class="text-gray-500 font-bold px-4 py-2 hover:bg-gray-50 rounded-lg transition">Batal</button>
+                    <button type="submit" class="bg-theme-green text-white font-bold px-6 py-2 rounded-lg hover-bg-theme-green transition shadow-md">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIC JAVASCRIPT: CRUD & WEATHER API -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Cek nama login
+            const savedFarmerStr = localStorage.getItem('agrihub_farmer');
+            if (savedFarmerStr) {
+                const farmer = JSON.parse(savedFarmerStr);
+                document.getElementById('farmer-name-display').innerText = farmer.name;
+            }
+            
+            // Jalankan fungsi
+            loadDashboardData();
+            loadProducts(); 
+            loadWeatherAPI(); // Panggil API Cuaca
+        });
+
+        // ==========================================
+        // 1. OPEN-METEO WEATHER API (GRATIS & AKURAT)
+        // ==========================================
+        async function loadWeatherAPI() {
+            try {
+                // Koordinat Tangerang (Bisa disesuaikan)
+                const lat = -6.1783; 
+                const lon = 106.6300;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FJakarta`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Fungsi untuk menerjemahkan kode cuaca satelit WMO ke Bahasa Manusia & Emoji
+                const getWeatherDesc = (code) => {
+                    if (code === 0) return { text: 'Cerah', icon: '☀️' };
+                    if (code <= 3) return { text: 'Berawan', icon: '⛅' };
+                    if (code <= 48) return { text: 'Berkabut', icon: '🌫️' };
+                    if (code <= 55) return { text: 'Gerimis', icon: '🌧️' };
+                    if (code <= 65) return { text: 'Hujan', icon: '🌧️' };
+                    if (code <= 82) return { text: 'Hujan Deras', icon: '🌦️' };
+                    if (code >= 95) return { text: 'Badai Petir', icon: '⛈️' };
+                    return { text: 'Tidak Diketahui', icon: '🌡️' };
+                };
+
+                // Update Cuaca Hari Ini (Current)
+                const current = data.current;
+                const todayDaily = data.daily;
+                const currentInfo = getWeatherDesc(current.weather_code);
+                
+                const curIcon = document.getElementById('weather-current-icon');
+                curIcon.classList.remove('animate-pulse');
+                curIcon.innerText = currentInfo.icon;
+                
+                document.getElementById('weather-current-temp').innerText = `${Math.round(current.temperature_2m)}°`;
+                document.getElementById('weather-current-min').innerText = `/${Math.round(todayDaily.temperature_2m_min[0])}°`;
+                document.getElementById('weather-current-desc').innerText = currentInfo.text;
+
+                // Update Prakiraan 4 Hari Kedepan (Mulai dari besok / index 1)
+                const forecastGrid = document.getElementById('weather-forecast-grid');
+                forecastGrid.innerHTML = ''; // Kosongkan loading
+
+                for(let i = 1; i <= 4; i++) {
+                    const dateObj = new Date(todayDaily.time[i]);
+                    const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+                    const info = getWeatherDesc(todayDaily.weather_code[i]);
+                    const maxTemp = Math.round(todayDaily.temperature_2m_max[i]);
+                    
+                    forecastGrid.innerHTML += `
+                        <div class="bg-weather-sub rounded-2xl p-4 text-center shadow-sm">
+                            <p class="text-xs text-gray-500 font-bold mb-2">${dateStr}</p>
+                            <div class="text-3xl mb-1 drop-shadow-sm">${info.icon}</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-1">${maxTemp}°</h4>
+                            <p class="text-[10px] text-gray-500 font-medium uppercase tracking-wider">${info.text}</p>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error("Gagal mengambil data cuaca API:", error);
+                document.getElementById('weather-current-desc').innerText = "Gagal memuat API cuaca";
+                document.getElementById('weather-forecast-grid').innerHTML = '<div class="col-span-full text-center text-xs text-red-500 py-4">Koneksi ke satelit cuaca terputus.</div>';
+            }
+        }
+
+        // ==========================================
+        // 2. DASHBOARD STATS (BACKEND TEMANMU)
+        // ==========================================
+        async function loadDashboardData() {
+            try {
+                const res = await fetch('/api/dashboard');
+                const data = await res.json();
+                document.getElementById('stat-orders').innerText = data.totalOrders || 0;
+                document.getElementById('stat-products').innerText = data.totalProducts || 0;
+            } catch (error) {
+                console.error("Gagal memuat dashboard stat:", error);
+            }
+        }
+
+        // ==========================================
+        // 3. READ TABLE CRUD (BACKEND TEMANMU)
+        // ==========================================
+        async function loadProducts() {
+            const tableBody = document.getElementById('product-table-body');
+            try {
+                const res = await fetch('/api/products');
+                const products = await res.json();
+                
+                tableBody.innerHTML = '';
+                let totalAssetValue = 0;
+
+                if (products.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">Database masih kosong.</td></tr>';
+                    document.getElementById('total-asset-value').innerText = 'Rp 0';
+                    document.getElementById('asset-count').innerText = '0 Item';
+                    return;
+                }
+
+                products.forEach(p => {
+                    const isLowStock = p.stock <= 10;
+                    totalAssetValue += (p.price * p.stock);
+                    
+                    tableBody.innerHTML += `
+                        <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition">
+                            <td class="p-4 font-bold text-gray-900">${p.name}
+                                ${isLowStock ? '<span class="ml-2 text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Stok Menipis</span>' : ''}
+                            </td>
+                            <td class="p-4 text-gray-500 text-xs font-semibold">${p.category || '-'}</td>
+                            <td class="p-4 ${isLowStock ? 'text-red-600 font-bold' : 'text-gray-900'}">${p.stock} Kg</td>
+                            <td class="p-4 text-gray-900 font-medium">Rp ${p.price.toLocaleString('id-ID')}</td>
+                            <td class="p-4 text-right space-x-2">
+                                <button onclick='editProduct(${JSON.stringify(p)})' class="text-blue-600 bg-blue-50 px-3 py-1 rounded text-xs font-bold hover:bg-blue-100 transition">Edit</button>
+                                <button onclick="deleteProduct('${p.id}')" class="text-red-600 bg-red-50 px-3 py-1 rounded text-xs font-bold hover:bg-red-100 transition">Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('total-asset-value').innerText = `Rp ${(totalAssetValue/1000).toLocaleString('id-ID')}K`;
+                document.getElementById('asset-count').innerText = `${products.length} Item`;
+                document.getElementById('stat-products').innerText = products.length;
+
+            } catch (error) {
+                tableBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-red-500">Gagal menarik data. Server API mati?</td></tr>';
+            }
+        }
+
+        // ==========================================
+        // 4. LOGIKA MODAL CREATE & UPDATE
+        // ==========================================
+        const modal = document.getElementById('crud-modal');
+        const form = document.getElementById('product-form');
+
+        function openProductModal() {
+            document.getElementById('modal-title').innerText = "Tambah Panen Baru";
+            form.reset(); 
+            document.getElementById('prod-id').value = ''; 
+            modal.classList.remove('hidden');
+        }
+
+        function editProduct(product) {
+            document.getElementById('modal-title').innerText = "Edit Data Panen";
+            document.getElementById('prod-id').value = product.id; 
+            document.getElementById('prod-name').value = product.name;
+            document.getElementById('prod-stock').value = product.stock;
+            document.getElementById('prod-price').value = product.price;
+            document.getElementById('prod-category').value = product.category || 'Vegetables';
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            modal.classList.add('hidden');
+        }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault(); 
+            const id = document.getElementById('prod-id').value;
+            const data = {
+                name: document.getElementById('prod-name').value,
+                stock: parseInt(document.getElementById('prod-stock').value),
+                price: parseInt(document.getElementById('prod-price').value),
+                category: document.getElementById('prod-category').value,
+                seller: "Pusat",
+                description: "Produk segar dari ladang"
+            };
+
+            try {
+                if (id) {
+                    await fetch(`/api/products/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/products', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+                closeProductModal();
+                loadProducts(); 
+                loadDashboardData(); 
+            } catch (error) {
+                alert("Gagal menyimpan data ke database.");
+            }
+        }
+
+        async function deleteProduct(id) {
+            if(confirm("Yakin ingin menghapus produk ini dari gudang?")) {
+                try {
+                    await fetch(`/api/products/${id}`, { method: 'DELETE' });
+                    loadProducts(); 
+                    loadDashboardData();
+                } catch (error) {
+                    alert("Gagal menghapus data.");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
