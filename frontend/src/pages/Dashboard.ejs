@@ -22,22 +22,15 @@
 </head>
 <body class="text-gray-900 antialiased overflow-x-hidden min-h-screen flex flex-col">
 
-    <!-- NAVBAR (Dashboard Active) -->
-    <nav class="absolute top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
-    <!-- <nav class="bg-[#1A3626] w-full z-50 px-8 py-4 flex justify-between items-center text-white shadow-md"> -->
-        <div class="text-2xl font-bold text-white tracking-tight">AgriHub</div>
-        
-        <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
-            <a href="/" class="text-white border-b-2 border-green-400 pb-1">Home</a>
-            <a href="/marketplace" class="hover:text-white transition">Marketplace</a>
-            <a href="#" class="hover:text-white transition">Weather Alerts</a>
-            <a href="#" class="hover:text-white transition">Reports</a>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <span class="text-sm hidden md:block">📍 Tangerang, Banten</span>
-            <div class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center font-bold shadow-inner">
-                👨‍🌾
+    <!-- WADAH UTAMA (NAVBAR SELALU MUNCUL) -->
+    <div class="relative w-full bg-cover bg-center shadow-md" style="background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-[#1A3626]/80 backdrop-blur-sm"></div>
+        <nav class="relative z-10 w-full px-8 py-6 flex justify-between items-center text-white border-b border-white/10">
+            <div class="text-2xl font-bold tracking-tight">AgriHub <span class="text-xs bg-green-600 px-2 py-1 rounded text-white ml-2">ADMIN</span></div>
+            <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
+                <!-- <a href="/" class="hover:text-white transition">Home</a> -->
+                <a href="/marketplace" class="hover:text-white transition">Marketplace</a>
+                <a href="/dashboard" class="text-white border-b-2 border-green-400 pb-1">Dashboard</a>
             </div>
             <div id="auth-nav-ui" class="flex items-center gap-4"></div>
         </nav>
@@ -163,32 +156,45 @@
                             </div>
                             <p id="weather-current-desc" class="text-xs text-gray-600 mt-1 font-medium">Memuat satelit...</p>
                         </div>
-                        <p class="font-bold text-gray-900">50 Kg</p>
+                        <div id="weather-current-icon" class="text-6xl drop-shadow-md animate-pulse">⏳</div>
                     </div>
-
-                    <!-- Item Gudang 2 (Warning) -->
-                    <div class="flex justify-between items-center p-3 -mx-3 bg-red-50 rounded-xl border border-red-100">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-lg">🥬</div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-900">Sawi Putih</h4>
-                                <p class="text-xs text-red-600 font-medium">Mendekati Busuk (H-1)</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold text-gray-900">15 Kg</p>
-                            <a href="/marketplace" class="text-[10px] bg-red-600 text-white px-2 py-1 rounded font-bold hover:bg-red-700 transition">Diskon Sekarang</a>
-                        </div>
+                    <div id="weather-forecast-container" class="space-y-3 mt-4">
+                        <!-- Prediksi cuaca 3 hari ke depan akan dimuat di sini -->
                     </div>
+                </div>
 
-                    <!-- Item Gudang 3 -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-lg">🧅</div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-900">Bawang Merah</h4>
-                                <p class="text-xs text-green-600 font-medium">Kondisi Kering (Aman)</p>
-                            </div>
+                <!-- AI MARKET INSIGHTS -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                            <span>✨ AI Market Insights</span>
+                        </h2>
+                    </div>
+                    <div class="bg-card-blue border border-blue-100 rounded-3xl p-6 shadow-sm">
+                        <div id="ai-loading" class="flex flex-col items-center justify-center py-4">
+                            <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+                            <p class="text-sm text-blue-800 font-medium animate-pulse">Gemini Flash sedang menganalisa pasar...</p>
+                        </div>
+                        <div id="ai-insights-content" class="hidden text-sm text-gray-700 leading-relaxed space-y-3">
+                            <!-- AI Content goes here -->
+                        </div>
+                        <button onclick="fetchAIInsights()" id="btn-refresh-ai" class="mt-4 w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold py-2 rounded-xl transition text-xs flex items-center justify-center gap-2">
+                            <span>🔄 Perbarui Analisa AI</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ASSET ESTIMATION -->
+                <div class="bg-weather-main rounded-3xl p-6 shadow-sm flex flex-col justify-between mt-auto">
+                    <h3 class="font-bold text-gray-800 mb-4">Total Stock Value</h3>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Total Produk Gudang</span><span id="asset-count" class="text-sm font-bold">0 Item</span>
+                    </div>
+                    <hr class="border-green-200 mb-4">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Total Asset Estimation</p>
+                            <h3 id="total-asset-value" class="text-2xl lg:text-3xl font-black text-gray-900">Rp 0</h3>
                         </div>
                     </div>
                 </div>
@@ -196,5 +202,438 @@
         </div>
     </main>
 
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 bg-white border-l-4 border-theme-green shadow-2xl rounded-lg p-4 z-[200] transform translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-3"><span id="toast-message" class="text-gray-800 font-semibold text-sm">Notifikasi</span></div>
+
+    <!-- MODAL CRUD PRODUCT -->
+    <div id="crud-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative">
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-1">Tambah Panen Baru</h2>
+            <p class="text-sm text-gray-500 mb-6">Masa kedaluwarsa akan otomatis diset 7 Hari sejak diinput.</p>
+            <form id="product-form" onsubmit="handleProductSubmit(event)">
+                <input type="hidden" id="prod-id">
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Nama Produk</label>
+                    <input type="text" id="prod-name" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Stok (Kg)</label>
+                        <input type="number" id="prod-stock" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Harga (Rp/Kg)</label>
+                        <input type="number" id="prod-price" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Kategori</label>
+                    <select id="prod-category" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Herbs & Spices">Herbs & Spices</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeProductModal()" class="text-gray-500 font-bold px-4 py-2 rounded-lg">Batal</button>
+                    <button type="submit" id="btn-save-product" class="bg-[#165B33] text-white font-bold px-6 py-2 rounded-lg">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIC JAVASCRIPT -->
+    <script>
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').innerText = message;
+            if(isError) toast.classList.replace('border-theme-green', 'border-red-500');
+            else toast.classList.replace('border-red-500', 'border-theme-green');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => { checkAdminAuth(); });
+
+        function checkAdminAuth() {
+            const adminData = localStorage.getItem('agrihub_admin_auth');
+            const authNavUI = document.getElementById('auth-nav-ui');
+
+            if (adminData) {
+                const name = JSON.parse(adminData).name;
+                document.getElementById('welcome-header').classList.remove('hidden');
+                document.getElementById('dashboard-main').classList.remove('hidden');
+                document.getElementById('dashboard-main').classList.add('flex');
+                document.getElementById('login-header-space').classList.add('hidden');
+                document.getElementById('login-main').classList.add('hidden');
+                document.getElementById('farmer-name-display').innerText = name;
+                
+                authNavUI.innerHTML = `<div class="text-right"><p class="text-sm font-bold text-white">${name}</p><button onclick="farmerLogout()" class="text-xs text-red-300 font-medium hover:text-red-100 transition">Logout Keluar</button></div><div class="w-10 h-10 bg-[#165B33] rounded-full flex items-center justify-center font-bold shadow-inner text-xl border-2 border-white/20">👨‍🌾</div>`;
+                
+                loadProducts(); loadOrdersHistory(); loadWeatherAPI();
+            } else {
+                document.getElementById('welcome-header').classList.add('hidden');
+                document.getElementById('dashboard-main').classList.add('hidden');
+                document.getElementById('dashboard-main').classList.remove('flex');
+                document.getElementById('login-header-space').classList.remove('hidden');
+                document.getElementById('login-main').classList.remove('hidden');
+                authNavUI.innerHTML = `<div class="text-right"><p class="text-sm font-bold text-gray-300">Guest</p></div><div class="w-10 h-10 bg-gray-500/50 rounded-full flex items-center justify-center font-bold shadow-inner text-xl border-2 border-white/20">🔒</div>`;
+            }
+        }
+
+        async function processFarmerLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('farmer-email').value;
+            const password = document.getElementById('farmer-password').value;
+            const btn = document.getElementById('btn-farmer-login');
+            btn.innerText = "Mengautentikasi..."; btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.user && data.user.role === 'admin') {
+                        localStorage.setItem('agrihub_admin_auth', JSON.stringify({ name: data.user.name }));
+                        showToast(`✅ Login Berhasil! Autentikasi Admin Sah.`);
+                        checkAdminAuth(); 
+                    } else {
+                        showToast(`❌ Akses ditolak! Akun ini bukan admin.`, true);
+                    }
+                } else {
+                    showToast(`❌ ${data.message || 'Login gagal!'}`, true);
+                }
+            } catch (error) {
+                showToast(`❌ Terjadi kesalahan jaringan.`, true);
+            } finally {
+                btn.innerText = "Log In Dashboard"; btn.disabled = false;
+            }
+        }
+
+        function farmerLogout() { 
+            localStorage.removeItem('agrihub_admin_auth'); 
+            showToast("👋 Sesi Admin diakhiri."); checkAdminAuth(); 
+        }
+
+        // ==========================================
+        // FITUR 1: FETCH DATA PRODUK (DENGAN EXPIRED)
+        // ==========================================
+        async function loadProducts() {
+            const tableBody = document.getElementById('product-table-body');
+            try {
+                const res = await fetch('/api/products');
+                const products = await res.json();
+                tableBody.innerHTML = '';
+                let totalAssetValue = 0;
+                
+                if (products.length === 0) { tableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Database kosong.</td></tr>'; return; }
+                
+                products.forEach(p => {
+                    totalAssetValue += (p.price * p.stock);
+                    
+                    // Menghitung Masa Kedaluwarsa (Asumsi 7 Hari dari tanggal input)
+                    let expireText = "<span class='text-gray-400'>N/A</span>";
+                    let isExpiring = false;
+                    let isExpired = false;
+
+                    if (p.createdAt) {
+                        // Handle format tanggal Firestore
+                        const inputDate = new Date(p.createdAt._seconds ? p.createdAt._seconds * 1000 : p.createdAt);
+                        const expireDate = new Date(inputDate.getTime() + (7 * 24 * 60 * 60 * 1000)); // +7 Hari
+                        const today = new Date();
+                        const timeDiff = expireDate.getTime() - today.getTime();
+                        const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                        if (daysLeft < 0) {
+                            isExpired = true;
+                            expireText = `<span class="text-red-600 font-bold bg-red-50 px-2 py-1 rounded">Kadaluarsa</span>`;
+                        } else if (daysLeft <= 2) {
+                            isExpiring = true;
+                            expireText = `<span class="text-yellow-600 font-bold bg-yellow-50 px-2 py-1 rounded">Sisa ${daysLeft} Hari</span>`;
+                        } else {
+                            expireText = `<span class="text-green-600 font-bold bg-green-50 px-2 py-1 rounded">Sisa ${daysLeft} Hari</span>`;
+                        }
+                    } else {
+                        // Jika tidak ada data tanggal, buat data dummy "Sisa 5 Hari" untuk presentasi
+                        expireText = `<span class="text-green-600 font-bold bg-green-50 px-2 py-1 rounded">Sisa 5 Hari</span>`;
+                    }
+
+                    // Fitur Upcycle untuk barang yang hampir expired atau sudah expired
+                    const actionBtns = (isExpiring || isExpired)
+                        ? `<button onclick="upcycleProduct('${p.id}', '${p.name}')" class="bg-yellow-500 text-white px-3 py-1.5 rounded text-xs font-bold shadow-md hover:bg-yellow-600 w-full mb-1">🔄 Upcycle to Pupuk</button>` 
+                        : `<button onclick='editProduct(${JSON.stringify(p)})' class="text-blue-600 bg-blue-50 px-3 py-1 rounded text-xs font-bold mr-1">Edit</button><button onclick="deleteProduct('${p.id}')" class="text-red-600 bg-red-50 px-3 py-1 rounded text-xs font-bold">Hapus</button>`;
+
+                    tableBody.innerHTML += `
+                        <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                            <td class="p-4 font-bold text-gray-900">${p.name} <br><span class="text-[10px] text-gray-400 font-normal">${p.category || '-'}</span></td>
+                            <td class="p-4 text-xs">${expireText}</td>
+                            <td class="p-4">
+                                <span class="font-bold ${p.stock <= 5 ? 'text-red-600' : 'text-gray-900'}">${p.stock} Kg</span> <br>
+                                <span class="text-xs text-gray-500">Rp ${p.price.toLocaleString('id-ID')}</span>
+                            </td>
+                            <td class="p-4 text-right align-middle">${actionBtns}</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('total-asset-value').innerText = `Rp ${(totalAssetValue/1000).toLocaleString('id-ID')}K`;
+                document.getElementById('asset-count').innerText = `${products.length} Item`;
+                
+                // Store products globally for AI context
+                window.currentInventory = products;
+            } catch (error) {}
+        }
+
+        async function upcycleProduct(id, name) {
+            if(confirm(`Kirim sisa stok [${name}] ke Mitra Pengolah Pupuk (Upcycle)?\nIni akan menghapusnya dari inventaris utama.`)) {
+                await fetch(`/api/products/${id}`, { method: 'DELETE' }); 
+                showToast(`♻️ ${name} berhasil disalurkan untuk dijadikan pupuk organik!`); 
+                loadProducts(); 
+            }
+        }
+
+        // ==========================================
+        // FITUR 2: FETCH PESANAN & UBAH STATUS
+        // ==========================================
+        async function loadOrdersHistory() {
+            const tableBody = document.getElementById('orders-table-body');
+            try {
+                const res = await fetch('/api/orders');
+                const orders = await res.json();
+                tableBody.innerHTML = '';
+                
+                if (orders.length === 0) { tableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Belum ada pesanan masuk.</td></tr>'; return; }
+                
+                // Urutkan dari yang terbaru
+                orders.sort((a,b) => new Date(b.createdAt?._seconds ? b.createdAt._seconds * 1000 : b.createdAt) - new Date(a.createdAt?._seconds ? a.createdAt._seconds * 1000 : a.createdAt));
+                
+                orders.forEach(order => {
+                    let orderItemsStr = '';
+                    if (order.items) order.items.forEach(item => orderItemsStr += `<div class="text-xs text-gray-600">• ${item.productName || 'Produk'} <span class="font-bold">(${item.quantity} kg)</span></div>`);
+                    
+                    let dateStr = 'Baru saja';
+                    if (order.createdAt) {
+                        const d = new Date(order.createdAt._seconds ? order.createdAt._seconds * 1000 : order.createdAt);
+                        dateStr = d.toLocaleDateString('id-ID', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                    }
+
+                    // Tentukan warna badge dropdown berdasarkan status
+                    let statusColor = "bg-yellow-100 text-yellow-700"; // Default Pending
+                    if(order.status === "Diproses") statusColor = "bg-blue-100 text-blue-700 border-blue-200";
+                    if(order.status === "Dikirim") statusColor = "bg-purple-100 text-purple-700 border-purple-200";
+                    if(order.status === "Selesai") statusColor = "bg-green-100 text-green-700 border-green-200";
+
+                    tableBody.innerHTML += `
+                        <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                            <td class="p-4"><span class="text-xs text-gray-500 font-medium">${dateStr}</span><br><span class="font-bold text-gray-900">${order.buyerName || 'Pembeli'}</span><br><span class="text-[10px] text-gray-500">${order.buyerPhone || ''}</span></td>
+                            <td class="p-4">${orderItemsStr}</td>
+                            <td class="p-4 font-bold text-[#165B33]">Rp ${(order.totalPrice || 0).toLocaleString('id-ID')}</td>
+                            <td class="p-4 text-right">
+                                <!-- DROPDOWN STATUS -->
+                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="status-dropdown text-xs font-bold rounded-lg px-3 py-2 border outline-none cursor-pointer shadow-sm transition ${statusColor}">
+                                    <option value="Pending" ${order.status==='Pending'?'selected':''} class="bg-white text-gray-900">⏳ Pending</option>
+                                    <option value="Diproses" ${order.status==='Diproses'?'selected':''} class="bg-white text-gray-900">📦 Diproses</option>
+                                    <option value="Dikirim" ${order.status==='Dikirim'?'selected':''} class="bg-white text-gray-900">🚚 Dikirim</option>
+                                    <option value="Selesai" ${order.status==='Selesai'?'selected':''} class="bg-white text-gray-900">✅ Selesai</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) { tableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-red-500">Gagal memuat pesanan.</td></tr>'; }
+        }
+
+        // FUNGSI TEMBAK API UNTUK UPDATE STATUS PESANAN
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                // Menembak API updateOrder buatan temanmu (metode PUT)
+                const res = await fetch(`/api/orders/${orderId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (res.ok) {
+                    showToast(`📦 Status Pesanan berhasil diubah menjadi: ${newStatus}`);
+                    loadOrdersHistory(); // Refresh tabel biar warnanya ganti
+                } else {
+                    showToast(`❌ Gagal mengubah status pesanan.`, true);
+                }
+            } catch (error) {
+                showToast(`❌ Terjadi kesalahan jaringan.`, true);
+            }
+        }
+
+
+        // ==========================================
+        // 3. FUNGSI CRUD PRODUK (TANPA TOKEN)
+        // ==========================================
+        const modal = document.getElementById('crud-modal');
+        const form = document.getElementById('product-form');
+        
+        function openProductModal() { form.reset(); document.getElementById('prod-id').value = ''; modal.classList.remove('hidden'); }
+        function editProduct(product) {
+            document.getElementById('prod-id').value = product.id; document.getElementById('prod-name').value = product.name;
+            document.getElementById('prod-stock').value = product.stock; document.getElementById('prod-price').value = product.price;
+            document.getElementById('prod-category').value = product.category || 'Vegetables'; modal.classList.remove('hidden');
+        }
+        function closeProductModal() { modal.classList.add('hidden'); }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault(); 
+            const id = document.getElementById('prod-id').value;
+            const data = { name: document.getElementById('prod-name').value, stock: parseInt(document.getElementById('prod-stock').value), price: parseInt(document.getElementById('prod-price').value), category: document.getElementById('prod-category').value, seller: "Pusat", description: "Produk segar" };
+            
+            const btn = document.getElementById('btn-save-product');
+            btn.innerText = "Menyimpan..."; btn.disabled = true;
+
+            try {
+                if (id) { 
+                    await fetch(`/api/products/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); 
+                    closeProductModal(); loadProducts(); showToast("✅ Produk diubah!"); 
+                } else {
+                    // Karena kamu sudah hapus verifyToken di backend, ini akan berjalan lancar tanpa token!
+                    const res = await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                    if(res.ok) {
+                        closeProductModal(); loadProducts(); showToast("✅ Produk baru sah ditambahkan! Masa Expired aktif 7 hari."); 
+                    } else {
+                        showToast("⚠️ Gagal! Cek console atau pastikan verifyToken sudah benar-benar dihapus di backend.", true);
+                    }
+                }
+            } catch (error) { showToast("❌ Gagal menyimpan.", true); } finally { btn.innerText = "Simpan Data"; btn.disabled = false; }
+        }
+
+        async function deleteProduct(id) {
+            if(confirm("Yakin hapus?")) { 
+                await fetch(`/api/products/${id}`, { method: 'DELETE' }); 
+                showToast("🗑️ Produk dihapus."); loadProducts(); 
+            }
+        }
+
+        async function loadWeatherAPI() {
+            try {
+                const data = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-6.1783&longitude=106.6300&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FJakarta`)).json();
+                document.getElementById('weather-current-temp').innerText = `${Math.round(data.current.temperature_2m)}°`;
+                
+                const code = data.current.weather_code;
+                let desc = "Berawan";
+                let icon = "⛅";
+                if (code === 0) { desc = "Cerah"; icon = "☀️"; }
+                else if (code >= 1 && code <= 3) { desc = "Cerah Berawan"; icon = "⛅"; }
+                else if (code >= 45 && code <= 48) { desc = "Berkabut"; icon = "🌫️"; }
+                else if (code >= 51 && code <= 67) { desc = "Hujan Ringan/Sedang"; icon = "🌧️"; }
+                else if (code >= 80 && code <= 82) { desc = "Hujan Deras"; icon = "🌧️"; }
+                else if (code >= 95) { desc = "Badai Petir"; icon = "⛈️"; }
+
+                document.getElementById('weather-current-desc').innerText = desc;
+                document.getElementById('weather-current-icon').innerText = icon;
+                document.getElementById('weather-current-icon').classList.remove('animate-pulse');
+
+                const forecastContainer = document.getElementById('weather-forecast-container');
+                if (forecastContainer && data.daily) {
+                    forecastContainer.innerHTML = '';
+                    for (let i = 1; i <= 3; i++) {
+                        const dateStr = data.daily.time[i];
+                        const dateObj = new Date(dateStr);
+                        const dayName = dateObj.toLocaleDateString('id-ID', { weekday: 'short' });
+                        const maxTemp = Math.round(data.daily.temperature_2m_max[i]);
+                        const minTemp = Math.round(data.daily.temperature_2m_min[i]);
+                        const dCode = data.daily.weather_code[i];
+                        
+                        let dIcon = "⛅";
+                        if (dCode === 0) dIcon = "☀️";
+                        else if (dCode >= 1 && dCode <= 3) dIcon = "⛅";
+                        else if (dCode >= 45 && dCode <= 48) dIcon = "🌫️";
+                        else if (dCode >= 51 && dCode <= 67) dIcon = "🌧️";
+                        else if (dCode >= 80 && dCode <= 82) dIcon = "🌧️";
+                        else if (dCode >= 95) dIcon = "⛈️";
+                        
+                        forecastContainer.innerHTML += `
+                            <div class="bg-weather-sub rounded-2xl p-4 flex justify-between items-center shadow-sm">
+                                <span class="text-sm font-bold text-gray-700 w-12">${dayName}</span>
+                                <span class="text-2xl">${dIcon}</span>
+                                <div class="text-right text-sm font-medium text-gray-500">
+                                    <span class="text-gray-900 font-bold">${maxTemp}°</span> / ${minTemp}°
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                // Fetch AI Insights automatically after weather and inventory load
+                setTimeout(fetchAIInsights, 1500);
+
+            } catch (error) {
+                document.getElementById('weather-current-desc').innerText = "Gagal memuat cuaca";
+                document.getElementById('weather-current-icon').classList.remove('animate-pulse');
+            }
+        }
+
+        async function fetchAIInsights() {
+            const btnRefresh = document.getElementById('btn-refresh-ai');
+            const loadingUI = document.getElementById('ai-loading');
+            const contentUI = document.getElementById('ai-insights-content');
+            
+            if (btnRefresh) {
+                btnRefresh.disabled = true;
+                btnRefresh.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            
+            contentUI.classList.add('hidden');
+            loadingUI.classList.remove('hidden');
+
+            try {
+                const weatherDesc = document.getElementById('weather-current-desc').innerText || 'Cerah';
+                const tempText = document.getElementById('weather-current-temp').innerText || '30°';
+                const temperature = parseInt(tempText.replace('°', ''));
+                const month = new Date().toLocaleDateString('id-ID', { month: 'long' });
+                const inventory = window.currentInventory || [];
+                
+                // Keep only relevant fields to send to AI
+                const cleanInventory = inventory.map(item => ({
+                    name: item.name,
+                    stock: item.stock,
+                    price: item.price
+                }));
+
+                const res = await fetch('/api/ai/insights', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        weatherDesc,
+                        temperature,
+                        month,
+                        inventory: cleanInventory
+                    })
+                });
+
+                const data = await res.json();
+                
+                if (data.success) {
+                    contentUI.innerHTML = data.insights;
+                } else {
+                    contentUI.innerHTML = `<p class="text-red-500">⚠️ Gagal memuat rekomendasi AI.</p>`;
+                }
+            } catch (error) {
+                contentUI.innerHTML = `<p class="text-red-500">⚠️ Terjadi kesalahan koneksi AI.</p>`;
+            } finally {
+                loadingUI.classList.add('hidden');
+                contentUI.classList.remove('hidden');
+                if (btnRefresh) {
+                    btnRefresh.disabled = false;
+                    btnRefresh.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+    </script>
 </body>
 </html>

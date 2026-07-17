@@ -1,5 +1,17 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const cors = require("cors");
+const path = require("path"); // KUNCI 1: Kita butuh 'path' untuk mencari folder frontend
+require("dotenv").config();
+
+// --- 1. IMPORT ROUTE BACKEND (Buatan Temanmu) ---
+const orderRoutes = require("./routes/orderRoutes");
+const authRoutes = require("./routes/authRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const farmerRoutes = require("./routes/farmerRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const productRoutes = require("./routes/productRoutes");
+const aiRoutes = require("./routes/aiRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -12,11 +24,23 @@ app.set('views', path.join(__dirname, '../frontend/src/pages'));
 // Izinkan Express membaca file statis (CSS/JS Murni/Gambar) di 'frontend/public'
 app.use(express.static(path.join(__dirname, '../frontend/public')));
 
-app.get('/', (req, res) => {
-  res.render('Index', { 
-    judul: 'AgriHub Dashboard', 
-    petani: 'Pak Budi' 
-  });
+
+// --- 3. RUTE API BACKEND (Jangan diubah, ini punya temanmu) ---
+app.use("/api/products", productRoutes);
+app.use("/api/farmers", farmerRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
+
+
+// --- 4. RUTE TAMPILAN FRONTEND (Untuk memunculkan halaman EJS-mu) ---
+
+// Halaman Utama (Index)
+app.get("/", (req, res) => {
+    // Kita ganti res.send temanmu menjadi res.render milik kita
+    res.render("Index", { judul: 'AgriHub - Market & Weather' });
 });
 
 // Halaman Marketplace
