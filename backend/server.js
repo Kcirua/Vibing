@@ -11,6 +11,7 @@ const farmerRoutes = require("./routes/farmerRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const upcycleRoutes = require("./routes/upcycleRoutes");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/upcycles", upcycleRoutes);
 
 
 // --- 4. RUTE TAMPILAN FRONTEND (Untuk memunculkan halaman EJS-mu) ---

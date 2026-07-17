@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= locals.judul || 'AgriHub - Farmer Dashboard' %></title>
+    <title>AnAu Farms</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
     <div class="relative w-full bg-cover bg-center shadow-md" style="background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop');">
         <div class="absolute inset-0 bg-[#1A3626]/80 backdrop-blur-sm"></div>
         <nav class="relative z-10 w-full px-8 py-6 flex justify-between items-center text-white border-b border-white/10">
-            <div class="text-2xl font-bold tracking-tight">AgriHub <span class="text-xs bg-green-600 px-2 py-1 rounded text-white ml-2">ADMIN</span></div>
+            <div class="text-2xl font-bold tracking-tight">AnAu Farms <span class="text-xs bg-green-600 px-2 py-1 rounded text-white ml-2">ADMIN</span></div>
             <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
                 <!-- <a href="/" class="hover:text-white transition">Home</a> -->
                 <a href="/marketplace" class="hover:text-white transition">Marketplace</a>
@@ -38,7 +38,7 @@
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-6">
                 <div>
                     <p id="current-date" class="text-sm font-bold text-green-300 mb-2">Memuat tanggal...</p>
-                    <h1 class="text-3xl md:text-4xl font-bold">Halo, <span id="farmer-name-display">Juragan</span> 👋</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold">Halo, <span id="farmer-name-display">Juragan</h1>
                     <p class="text-gray-300 mt-2 text-lg max-w-xl">Pusat kendali operasional ladang dan stok panen.</p>
                 </div>
             </div>
@@ -50,20 +50,16 @@
     <main id="login-main" class="max-w-5xl mx-auto w-full px-4 md:px-8 relative z-20 -mt-16 mb-12">
         <div class="bg-white w-full md:h-[550px] rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden relative">
             <div class="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-white">
-                <div class="flex gap-3 mb-8">
-                    <div class="bg-white border border-gray-200 text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-blue-500 text-sm">▶</span> Google Play</div>
-                    <div class="bg-black border border-black text-white text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-sm">🍏</span> App Store</div>
-                </div>
                 <p class="text-gray-500 font-medium mb-1">Welcome Admin</p>
                 <h1 class="text-4xl font-black text-gray-900 mb-8 tracking-tight">Log In</h1>
                 <form id="form-fake-login" onsubmit="processFarmerLogin(event)">
                     <div class="mb-5">
                         <label class="block text-xs font-bold text-gray-700 mb-2">Your Email</label>
-                        <input type="email" id="farmer-email" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="admin@agrihub.com">
+                        <input type="email" id="farmer-email" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="admin@anaufarms.com">
                     </div>
                     <div class="mb-2">
                         <label class="block text-xs font-bold text-gray-700 mb-2">Password</label>
-                        <div class="relative"><input type="password" id="farmer-password" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="Password"><span class="absolute right-4 top-3 text-gray-400 cursor-pointer">👁️</span></div>
+                        <div class="relative"><input type="password" id="farmer-password" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="Password"></div>
                     </div>
                     <div class="text-right mb-6"><a href="#" class="text-[11px] text-blue-500 hover:underline font-medium">Lupa kata sandi ?</a></div>
                     <button type="submit" id="btn-farmer-login" class="w-full bg-[#165B33] text-white font-bold py-3.5 rounded-lg hover:bg-[#0f4224] transition shadow-md">Log In Dashboard</button>
@@ -72,8 +68,8 @@
             <div class="hidden md:flex w-1/2 bg-[#165B33] flex-col items-center justify-center p-12 text-center relative overflow-hidden">
                 <div class="absolute -top-16 -left-16 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-green-900/40 rounded-full blur-3xl"></div>
-                <div class="absolute top-8 right-8 text-white text-right"><h2 class="text-2xl font-bold tracking-tight">AgriHub</h2><p class="text-xs text-green-200 font-medium">( Farmer Admin )</p></div>
-                <img src="https://cdni.iconscout.com/illustration/premium/thumb/farmers-working-in-farm-4328221-3603126.png" class="w-4/5 object-contain mb-8 z-10 relative drop-shadow-2xl filter brightness-110">
+                <div class="absolute top-8 right-8 text-white text-right"><h2 class="text-2xl font-bold tracking-tight">AnAu Farms</h2><p class="text-xs text-green-200 font-medium">( Farmer Admin )</p></div>
+                <img src="https://cdn.pixabay.com/photo/2026/05/25/11/01/11-01-48-344_1280.png" style="width: 40%" class="w-4/5 object-contain mb-8 z-10 relative drop-shadow-2xl filter brightness-110">
                 <h3 class="text-3xl font-bold text-white mb-3 z-10 relative">Manage your farm easily</h3>
                 <p class="text-green-100 text-sm z-10 relative px-4 max-w-sm leading-relaxed">Control your inventory, monitor weather, and check incoming orders efficiently in one place!</p>
             </div>
@@ -114,6 +110,46 @@
                                 </thead>
                                 <tbody id="product-table-body" class="text-sm text-gray-700">
                                     <tr><td colspan="4" class="p-4 text-center text-gray-400">Memuat data dari database...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- UPCYCLE & WASTE MANAGEMENT -->
+                <div class="mt-8">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">Kemitraan Pengolahan Pupuk (Upcycle)</h2>
+                    
+                    <!-- Impact Metrics -->
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="bg-green-50 border border-green-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
+                            <div>
+                                <p class="text-xs text-green-700 font-bold mb-1">Limbah Diselamatkan</p>
+                                <h3 id="upcycle-total-kg" class="text-2xl font-black text-green-900">0 Kg</h3>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
+                            <div>
+                                <p class="text-xs text-blue-700 font-bold mb-1">Estimasi Pupuk</p>
+                                <h3 id="upcycle-fertilizer-kg" class="text-2xl font-black text-blue-900">0 Kg</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcycle History Table -->
+                    <div class="bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-100 text-sm text-gray-500">
+                                        <th class="p-4 font-semibold">Tgl / Mitra Penjemput</th>
+                                        <th class="p-4 font-semibold">Bahan Mentah</th>
+                                        <th class="p-4 font-semibold">Status Kemitraan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="upcycle-table-body" class="text-sm text-gray-700">
+                                    <tr><td colspan="3" class="p-4 text-center text-gray-400">Memuat riwayat upcycle...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -167,7 +203,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                            <span>✨ AI Market Insights</span>
+                            <span>AI Market Insights</span>
                         </h2>
                     </div>
                     <div class="bg-card-blue border border-blue-100 rounded-3xl p-6 shadow-sm">
@@ -205,11 +241,40 @@
     <!-- TOAST NOTIFICATION -->
     <div id="toast-notification" class="fixed bottom-6 right-6 bg-white border-l-4 border-theme-green shadow-2xl rounded-lg p-4 z-[200] transform translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-3"><span id="toast-message" class="text-gray-800 font-semibold text-sm">Notifikasi</span></div>
 
+    <!-- MODAL KONTAK MITRA UPCYCLE -->
+    <div id="mitra-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Konfirmasi Pengangkutan</h2>
+            <p class="text-sm text-gray-600 mb-6">Barang kadaluarsa berikut akan dijemput oleh pihak <span class="font-bold text-gray-900">PT Pupuk Organik Tbk</span> untuk diolah menjadi pupuk.</p>
+            
+            <div class="bg-green-50 border border-green-100 rounded-2xl p-4 mb-6">
+                <p class="text-xs text-gray-500 mb-1">Bahan Mentah:</p>
+                <p id="mitra-item-name" class="font-bold text-gray-900 text-lg mb-3">-</p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-xs text-gray-500">Total Limbah:</p>
+                        <p id="mitra-item-stock" class="font-bold text-red-600">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Estimasi Pupuk:</p>
+                        <p id="mitra-item-fertilizer" class="font-bold text-green-700">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button onclick="closeMitraModal()" class="text-gray-500 font-bold px-4 py-2 rounded-lg hover:bg-gray-50">Batal</button>
+                <button id="btn-mitra-confirm" onclick="confirmMitraContact()" class="bg-[#165B33] hover:bg-green-800 text-white font-bold px-6 py-2 rounded-lg transition-colors">Oke, Kontak Sekarang</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL CRUD PRODUCT -->
     <div id="crud-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative">
             <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-1">Tambah Panen Baru</h2>
-            <p class="text-sm text-gray-500 mb-6">Masa kedaluwarsa akan otomatis diset 7 Hari sejak diinput.</p>
+            <p class="text-sm text-gray-500 mb-6">Masukkan detail produk serta perkiraan masa simpannya.</p>
             <form id="product-form" onsubmit="handleProductSubmit(event)">
                 <input type="hidden" id="prod-id">
                 <div class="mb-4">
@@ -233,6 +298,20 @@
                         <option value="Fruits">Fruits</option>
                         <option value="Herbs & Spices">Herbs & Spices</option>
                     </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Tanggal Panen</label>
+                        <input type="date" id="prod-harvest-date" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Perkiraan Expired</label>
+                        <input type="date" id="prod-expire-date" required class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Deskripsi Produk</label>
+                    <textarea id="prod-desc" required rows="3" class="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-[#165B33]" placeholder="Tuliskan deskripsi produk yang menarik..."></textarea>
                 </div>
                 <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
                     <button type="button" onclick="closeProductModal()" class="text-gray-500 font-bold px-4 py-2 rounded-lg">Batal</button>
@@ -276,7 +355,7 @@
                 
                 authNavUI.innerHTML = `<div class="text-right"><p class="text-sm font-bold text-white">${name}</p><button onclick="farmerLogout()" class="text-xs text-red-300 font-medium hover:text-red-100 transition">Logout Keluar</button></div><div class="w-10 h-10 bg-[#165B33] rounded-full flex items-center justify-center font-bold shadow-inner text-xl border-2 border-white/20">👨‍🌾</div>`;
                 
-                loadProducts(); loadOrdersHistory(); loadWeatherAPI();
+                loadProducts(); loadOrdersHistory(); loadWeatherAPI(); loadUpcycleHistory();
             } else {
                 document.getElementById('welcome-header').classList.add('hidden');
                 document.getElementById('dashboard-main').classList.add('hidden');
@@ -341,16 +420,24 @@
                 products.forEach(p => {
                     totalAssetValue += (p.price * p.stock);
                     
-                    // Menghitung Masa Kedaluwarsa (Asumsi 7 Hari dari tanggal input)
+                    // Menghitung Masa Kedaluwarsa
                     let expireText = "<span class='text-gray-400'>N/A</span>";
                     let isExpiring = false;
                     let isExpired = false;
 
-                    if (p.createdAt) {
-                        // Handle format tanggal Firestore
-                        const inputDate = new Date(p.createdAt._seconds ? p.createdAt._seconds * 1000 : p.createdAt);
-                        const expireDate = new Date(inputDate.getTime() + (7 * 24 * 60 * 60 * 1000)); // +7 Hari
+                    if (p.expireDate || p.createdAt) {
+                        let expireDate;
+                        if (p.expireDate) {
+                            expireDate = new Date(p.expireDate);
+                        } else {
+                            const inputDate = new Date(p.createdAt._seconds ? p.createdAt._seconds * 1000 : p.createdAt);
+                            expireDate = new Date(inputDate.getTime() + (7 * 24 * 60 * 60 * 1000)); // fallback
+                        }
+                        
                         const today = new Date();
+                        today.setHours(0,0,0,0);
+                        expireDate.setHours(0,0,0,0);
+                        
                         const timeDiff = expireDate.getTime() - today.getTime();
                         const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
@@ -370,7 +457,7 @@
 
                     // Fitur Upcycle untuk barang yang hampir expired atau sudah expired
                     const actionBtns = (isExpiring || isExpired)
-                        ? `<button onclick="upcycleProduct('${p.id}', '${p.name}')" class="bg-yellow-500 text-white px-3 py-1.5 rounded text-xs font-bold shadow-md hover:bg-yellow-600 w-full mb-1">🔄 Upcycle to Pupuk</button>` 
+                        ? `<button onclick="openMitraModal('${p.id}', '${p.name}', ${p.stock})" class="bg-[#165B33] text-white px-3 py-1.5 rounded text-xs font-bold shadow-md hover:bg-green-800 w-full mb-1">Kontak Mitra</button>` 
                         : `<button onclick='editProduct(${JSON.stringify(p)})' class="text-blue-600 bg-blue-50 px-3 py-1 rounded text-xs font-bold mr-1">Edit</button><button onclick="deleteProduct('${p.id}')" class="text-red-600 bg-red-50 px-3 py-1 rounded text-xs font-bold">Hapus</button>`;
 
                     tableBody.innerHTML += `
@@ -393,11 +480,88 @@
             } catch (error) {}
         }
 
-        async function upcycleProduct(id, name) {
-            if(confirm(`Kirim sisa stok [${name}] ke Mitra Pengolah Pupuk (Upcycle)?\nIni akan menghapusnya dari inventaris utama.`)) {
-                await fetch(`/api/products/${id}`, { method: 'DELETE' }); 
-                showToast(`♻️ ${name} berhasil disalurkan untuk dijadikan pupuk organik!`); 
-                loadProducts(); 
+        let currentMitraProductId = null;
+        
+        function openMitraModal(id, name, stock) {
+            currentMitraProductId = id;
+            document.getElementById('mitra-item-name').innerText = name;
+            document.getElementById('mitra-item-stock').innerText = `${stock} Kg`;
+            document.getElementById('mitra-item-fertilizer').innerText = `${Math.round(stock * 0.4)} Kg`;
+            document.getElementById('mitra-modal').classList.remove('hidden');
+        }
+
+        function closeMitraModal() {
+            document.getElementById('mitra-modal').classList.add('hidden');
+            currentMitraProductId = null;
+        }
+
+        async function confirmMitraContact() {
+            if(!currentMitraProductId) return;
+            const btn = document.getElementById('btn-mitra-confirm');
+            btn.innerText = "Mengontak..."; btn.disabled = true;
+            
+            try {
+                const res = await fetch('/api/upcycles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId: currentMitraProductId })
+                });
+                if (res.ok) {
+                    showToast(`Berhasil mengontak mitra. Barang akan segera dijemput!`);
+                    closeMitraModal();
+                    loadProducts();
+                    loadUpcycleHistory();
+                    
+                    // Scroll to the upcycle section
+                    document.getElementById('upcycle-total-kg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    showToast(`Gagal menghubungi mitra.`, true);
+                }
+            } catch(e) {
+                showToast(`Terjadi kesalahan jaringan.`, true);
+            } finally {
+                btn.innerText = "Oke, Kontak Sekarang"; btn.disabled = false;
+            }
+        }
+
+        async function loadUpcycleHistory() {
+            const tableBody = document.getElementById('upcycle-table-body');
+            try {
+                const res = await fetch('/api/upcycles');
+                const upcycles = await res.json();
+                tableBody.innerHTML = '';
+                
+                let totalKg = 0;
+                let totalFertilizer = 0;
+
+                if (upcycles.length === 0) { 
+                    tableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">Belum ada riwayat kemitraan.</td></tr>'; 
+                } else {
+                    upcycles.forEach(u => {
+                        totalKg += (u.quantityKg || 0);
+                        totalFertilizer += (u.estimatedFertilizerKg || 0);
+
+                        let dateStr = 'Baru saja';
+                        if (u.createdAt) {
+                            const d = new Date(u.createdAt._seconds ? u.createdAt._seconds * 1000 : u.createdAt);
+                            dateStr = d.toLocaleDateString('id-ID', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                        }
+
+                        tableBody.innerHTML += `
+                            <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                                <td class="p-4"><span class="text-xs text-gray-500 font-medium">${dateStr}</span><br><span class="font-bold text-gray-900">${u.partnerName}</span></td>
+                                <td class="p-4"><span class="font-bold text-gray-900">${u.name}</span> <br><span class="text-xs text-gray-500">${u.quantityKg} Kg</span></td>
+                                <td class="p-4"><span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold border border-yellow-200">⏳ ${u.status}</span></td>
+                            </tr>
+                        `;
+                    });
+                }
+                
+                document.getElementById('upcycle-total-kg').innerText = `${totalKg} Kg`;
+                document.getElementById('upcycle-fertilizer-kg').innerText = `${totalFertilizer} Kg`;
+
+            } catch (error) { 
+                tableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-red-500">Gagal memuat riwayat.</td></tr>'; 
             }
         }
 
@@ -440,10 +604,10 @@
                             <td class="p-4 text-right">
                                 <!-- DROPDOWN STATUS -->
                                 <select onchange="updateOrderStatus('${order.id}', this.value)" class="status-dropdown text-xs font-bold rounded-lg px-3 py-2 border outline-none cursor-pointer shadow-sm transition ${statusColor}">
-                                    <option value="Pending" ${order.status==='Pending'?'selected':''} class="bg-white text-gray-900">⏳ Pending</option>
-                                    <option value="Diproses" ${order.status==='Diproses'?'selected':''} class="bg-white text-gray-900">📦 Diproses</option>
-                                    <option value="Dikirim" ${order.status==='Dikirim'?'selected':''} class="bg-white text-gray-900">🚚 Dikirim</option>
-                                    <option value="Selesai" ${order.status==='Selesai'?'selected':''} class="bg-white text-gray-900">✅ Selesai</option>
+                                    <option value="Pending" ${order.status==='Pending'?'selected':''} class="bg-white text-gray-900">Pending</option>
+                                    <option value="Diproses" ${order.status==='Diproses'?'selected':''} class="bg-white text-gray-900">Diproses</option>
+                                    <option value="Dikirim" ${order.status==='Dikirim'?'selected':''} class="bg-white text-gray-900">Dikirim</option>
+                                    <option value="Selesai" ${order.status==='Selesai'?'selected':''} class="bg-white text-gray-900">Selesai</option>
                                 </select>
                             </td>
                         </tr>
@@ -463,13 +627,13 @@
                 });
 
                 if (res.ok) {
-                    showToast(`📦 Status Pesanan berhasil diubah menjadi: ${newStatus}`);
+                    showToast(`Status Pesanan berhasil diubah menjadi: ${newStatus}`);
                     loadOrdersHistory(); // Refresh tabel biar warnanya ganti
                 } else {
-                    showToast(`❌ Gagal mengubah status pesanan.`, true);
+                    showToast(`Gagal mengubah status pesanan.`, true);
                 }
             } catch (error) {
-                showToast(`❌ Terjadi kesalahan jaringan.`, true);
+                showToast(`Terjadi kesalahan jaringan.`, true);
             }
         }
 
@@ -484,14 +648,27 @@
         function editProduct(product) {
             document.getElementById('prod-id').value = product.id; document.getElementById('prod-name').value = product.name;
             document.getElementById('prod-stock').value = product.stock; document.getElementById('prod-price').value = product.price;
-            document.getElementById('prod-category').value = product.category || 'Vegetables'; modal.classList.remove('hidden');
+            document.getElementById('prod-category').value = product.category || 'Vegetables'; 
+            document.getElementById('prod-desc').value = product.description || '';
+            document.getElementById('prod-harvest-date').value = product.harvestDate || '';
+            document.getElementById('prod-expire-date').value = product.expireDate || '';
+            modal.classList.remove('hidden');
         }
         function closeProductModal() { modal.classList.add('hidden'); }
 
         async function handleProductSubmit(e) {
             e.preventDefault(); 
             const id = document.getElementById('prod-id').value;
-            const data = { name: document.getElementById('prod-name').value, stock: parseInt(document.getElementById('prod-stock').value), price: parseInt(document.getElementById('prod-price').value), category: document.getElementById('prod-category').value, seller: "Pusat", description: "Produk segar" };
+            const data = { 
+                name: document.getElementById('prod-name').value, 
+                stock: parseInt(document.getElementById('prod-stock').value), 
+                price: parseInt(document.getElementById('prod-price').value), 
+                category: document.getElementById('prod-category').value, 
+                seller: "Pusat", 
+                description: document.getElementById('prod-desc').value,
+                harvestDate: document.getElementById('prod-harvest-date').value,
+                expireDate: document.getElementById('prod-expire-date').value
+            };
             
             const btn = document.getElementById('btn-save-product');
             btn.innerText = "Menyimpan..."; btn.disabled = true;
@@ -499,23 +676,23 @@
             try {
                 if (id) { 
                     await fetch(`/api/products/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); 
-                    closeProductModal(); loadProducts(); showToast("✅ Produk diubah!"); 
+                    closeProductModal(); loadProducts(); showToast("Produk diubah!"); 
                 } else {
                     // Karena kamu sudah hapus verifyToken di backend, ini akan berjalan lancar tanpa token!
                     const res = await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                     if(res.ok) {
-                        closeProductModal(); loadProducts(); showToast("✅ Produk baru sah ditambahkan! Masa Expired aktif 7 hari."); 
+                        closeProductModal(); loadProducts(); showToast("Produk baru sah ditambahkan!"); 
                     } else {
-                        showToast("⚠️ Gagal! Cek console atau pastikan verifyToken sudah benar-benar dihapus di backend.", true);
+                        showToast("Gagal! Cek console atau pastikan verifyToken sudah benar-benar dihapus di backend.", true);
                     }
                 }
-            } catch (error) { showToast("❌ Gagal menyimpan.", true); } finally { btn.innerText = "Simpan Data"; btn.disabled = false; }
+            } catch (error) { showToast("Gagal menyimpan.", true); } finally { btn.innerText = "Simpan Data"; btn.disabled = false; }
         }
 
         async function deleteProduct(id) {
             if(confirm("Yakin hapus?")) { 
                 await fetch(`/api/products/${id}`, { method: 'DELETE' }); 
-                showToast("🗑️ Produk dihapus."); loadProducts(); 
+                showToast("Produk dihapus."); loadProducts(); 
             }
         }
 
@@ -621,10 +798,10 @@
                 if (data.success) {
                     contentUI.innerHTML = data.insights;
                 } else {
-                    contentUI.innerHTML = `<p class="text-red-500">⚠️ Gagal memuat rekomendasi AI.</p>`;
+                    contentUI.innerHTML = `<p class="text-red-500">Gagal memuat rekomendasi AI.</p>`;
                 }
             } catch (error) {
-                contentUI.innerHTML = `<p class="text-red-500">⚠️ Terjadi kesalahan koneksi AI.</p>`;
+                contentUI.innerHTML = `<p class="text-red-500">Terjadi kesalahan koneksi AI.</p>`;
             } finally {
                 loadingUI.classList.add('hidden');
                 contentUI.classList.remove('hidden');

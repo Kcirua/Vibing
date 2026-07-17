@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= locals.judul || 'AgriHub - B2B Marketplace' %></title>
+    <title>AnAu Farms</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
 
     <!-- NAVBAR -->
     <nav class="absolute top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
-        <div class="text-2xl font-bold text-white tracking-tight">AgriHub</div>
+        <div class="text-2xl font-bold text-white tracking-tight">AnAu Farms</div>
         <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
             <!-- <a href="/" class="hover:text-white transition">Home</a> -->
             <a href="/marketplace" class="text-white border-b-2 border-green-400 pb-1">Marketplace</a>
@@ -50,7 +50,7 @@
         <section>
             <div class="mb-8 flex justify-between items-end">
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold mb-3 border border-green-200">⭐ Live from Database</div>
+                    <!-- <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold mb-3 border border-green-200">Live from Database</div> -->
                     <h2 class="text-3xl font-bold text-gray-900">Our <span class="theme-green">Available Harvest</span></h2>
                 </div>
                 <p id="total-products-count" class="text-sm font-bold text-gray-500"></p>
@@ -77,12 +77,6 @@
             
             <!-- Kiri: Area Form Dinamis -->
             <div class="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-white relative">
-                
-                <div class="flex gap-3 mb-8">
-                    <div class="bg-white border border-gray-200 text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-blue-500 text-sm">▶</span> Google Play</div>
-                    <div class="bg-black border border-black text-white text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-sm">🍏</span> App Store</div>
-                </div>
-
                 <!-- TAMPILAN LOGIN -->
                 <div id="form-login-ui">
                     <p class="text-gray-500 font-medium mb-1">Welcome Buyer</p>
@@ -97,7 +91,6 @@
                             <label class="block text-xs font-bold text-gray-700 mb-2">Password</label>
                             <div class="relative">
                                 <input type="password" id="login-password" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="your password">
-                                <span class="absolute right-4 top-3 text-gray-400 cursor-pointer">👁️</span>
                             </div>
                         </div>
                         <div class="text-right mb-6">
@@ -114,7 +107,7 @@
 
                 <!-- TAMPILAN REGISTER -->
                 <div id="form-register-ui" class="hidden">
-                    <p class="text-gray-500 font-medium mb-1">Join AgriHub</p>
+                    <p class="text-gray-500 font-medium mb-1">Join AnAu Farms</p>
                     <h1 class="text-4xl font-black text-gray-900 mb-6 tracking-tight">Sign Up</h1>
 
                     <form onsubmit="processRegister(event)" class="space-y-3">
@@ -146,7 +139,7 @@
                 <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-green-900/40 rounded-full blur-3xl"></div>
 
                 <div class="absolute top-8 right-8 text-white text-right">
-                    <h2 class="text-2xl font-bold tracking-tight">AgriHub</h2>
+                    <h2 class="text-2xl font-bold tracking-tight">AnAu Farms</h2>
                     <p class="text-xs text-green-200 font-medium">( Marketplace )</p>
                 </div>
 
@@ -181,11 +174,42 @@
         </div>
     </div>
 
+    <!-- MODAL PRODUCT DETAIL -->
+    <div id="product-detail-modal" class="fixed inset-0 bg-black/60 z-[110] hidden flex items-center justify-center backdrop-blur-sm px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 font-bold text-2xl transition">&times;</button>
+            <div class="w-full h-48 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 border border-gray-100">
+                <!-- <div class="text-6xl">📦</div> -->
+            </div>
+            <div class="flex justify-between items-start mb-2">
+                <h3 id="detail-modal-name" class="text-2xl font-bold text-gray-900">Nama Produk</h3>
+                <span id="detail-modal-category" class="bg-green-50 text-green-700 text-xs font-bold px-2 py-1 rounded-md">Kategori</span>
+            </div>
+            <p id="detail-modal-price" class="text-theme-green font-black text-xl mb-4">Rp 0 / kg</p>
+            
+            <div class="mb-6">
+                <h4 class="text-sm font-bold text-gray-700 mb-2">Deskripsi Produk</h4>
+                <p id="detail-modal-desc" class="text-gray-600 text-sm leading-relaxed bg-gray-50 p-4 rounded-xl border border-gray-100 min-h-[80px]">
+                    Deskripsi tidak tersedia.
+                </p>
+            </div>
+            
+            <div class="flex justify-between items-center bg-blue-50 p-3 rounded-xl border border-blue-100 mb-6">
+                <span class="text-sm text-blue-800 font-bold">Stok Tersedia:</span>
+                <span id="detail-modal-stock" class="text-sm text-blue-900 font-black">0 kg</span>
+            </div>
+            
+            <div id="detail-action-container">
+                <!-- Action button (Add to Cart) will be injected here dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL CHECKOUT CART -->
     <div id="cart-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl relative flex flex-col max-h-[85vh]">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">🛒 Checkout</h2>
+                <h2 class="text-2xl font-bold text-gray-900">Checkout</h2>
                 <button onclick="closeCartModal()" class="text-gray-400 hover:text-red-500 font-bold text-2xl transition">&times;</button>
             </div>
             <div id="cart-items-container" class="overflow-y-auto flex-1 space-y-3 mb-2 py-2"></div>
@@ -203,9 +227,9 @@
             <div class="mt-4 pt-4 border-t border-gray-100">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Metode Pembayaran</label>
                 <select id="payment-method" class="w-full border border-gray-300 rounded-xl p-3 outline-none focus:border-green-500 bg-gray-50 font-medium text-gray-700 shadow-sm cursor-pointer">
-                    <option value="Transfer Bank (BCA)">🏦 Transfer Bank (BCA Virtual Account)</option>
-                    <option value="GoPay / OVO">📱 e-Wallet (GoPay / OVO / Dana)</option>
-                    <option value="COD (Bayar di Tempat)">🚚 COD (Bayar di Tempat)</option>
+                    <option value="Transfer Bank (BCA)">Transfer Bank (BCA Virtual Account)</option>
+                    <option value="GoPay / OVO">e-Wallet (GoPay / OVO / Dana)</option>
+                    <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
                 </select>
             </div>
             <div class="mt-4 pt-2">
@@ -300,12 +324,12 @@
                     renderAuthUI(); 
                     loadProductsGrid(); // Buka gembok tombol Add to Cart
                     
-                    showToast(`✅ Selamat datang kembali, ${realUser.name}!`);
+                    showToast(`Selamat datang kembali, ${realUser.name}!`);
                 } else {
-                    showToast("❌ Gagal: " + (result.message || "Email salah"), true);
+                    showToast("Gagal: " + (result.message || "Email salah"), true);
                 }
             } catch (error) {
-                showToast("❌ Terjadi kesalahan jaringan server.", true);
+                showToast("Terjadi kesalahan jaringan server.", true);
             } finally {
                 btn.innerText = "Log In"; btn.disabled = false;
             }
@@ -334,27 +358,27 @@
                 const result = await response.json();
                 
                 if (response.status === 201) {
-                    showToast(`✅ Registrasi berhasil!`);
+                    showToast(`Registrasi berhasil!`);
                     localStorage.setItem('agrihub_user', JSON.stringify({ uid: result.uid, name, email, phone }));
                     closeAuthModal(); 
                     renderAuthUI(); 
                     loadProductsGrid();
-                } else showToast("❌ Registrasi gagal: " + (result.message || result.error), true);
-            } catch (error) { showToast("❌ Terjadi kesalahan jaringan.", true); } 
+                } else showToast("Registrasi gagal: " + (result.message || result.error), true);
+            } catch (error) { showToast("Terjadi kesalahan jaringan.", true); } 
             finally { btn.innerText = "Sign Up"; btn.disabled = false; }
         }
 
         function logout() { 
             localStorage.removeItem('agrihub_user'); 
             cart = []; updateCartUI(); renderAuthUI(); loadProductsGrid(); 
-            showToast("👋 Anda telah keluar."); 
+            showToast("Anda telah keluar."); 
         }
 
         // ==========================================
         // LOGIKA KERANJANG & CHECKOUT
         // ==========================================
         function handleAddToCartClick(id, name, price, maxStock) {
-            if (!checkAuthState()) { showToast("🔒 Anda harus Login/Daftar terlebih dahulu untuk berbelanja.", true); return openAuthModal(); }
+            if (!checkAuthState()) { showToast("Anda harus Login/Daftar terlebih dahulu untuk berbelanja.", true); return openAuthModal(); }
             tempProduct = { id, name, price, maxStock };
             document.getElementById('add-modal-name').innerText = name;
             document.getElementById('add-modal-price').innerText = `Rp ${price.toLocaleString('id-ID')} / Kg`;
@@ -368,7 +392,7 @@
         function changeAddQty(delta) {
             let val = parseInt(document.getElementById('add-qty').value) + delta;
             if (val < 1) val = 1;
-            if (val > tempProduct.maxStock) { val = tempProduct.maxStock; showToast(`⚠️ Maksimal ${tempProduct.maxStock} kg`, true); }
+            if (val > tempProduct.maxStock) { val = tempProduct.maxStock; showToast(`Maksimal ${tempProduct.maxStock} kg`, true); }
             document.getElementById('add-qty').value = val;
         }
 
@@ -376,10 +400,10 @@
             const qty = parseInt(document.getElementById('add-qty').value);
             const existingItem = cart.find(item => item.productId === tempProduct.id);
             if (existingItem) {
-                if (existingItem.quantity + qty <= tempProduct.maxStock) { existingItem.quantity += qty; showToast(`✅ Ditambahkan lagi ke keranjang!`); } 
-                else return showToast(`⚠️ Melebihi batas stok!`, true);
+                if (existingItem.quantity + qty <= tempProduct.maxStock) { existingItem.quantity += qty; showToast(`Ditambahkan lagi ke keranjang!`); } 
+                else return showToast(`Melebihi batas stok!`, true);
             } else {
-                cart.push({ ...tempProduct, quantity: qty }); showToast(`✅ ${tempProduct.name} dimasukkan keranjang!`);
+                cart.push({ ...tempProduct, quantity: qty }); showToast(`${tempProduct.name} dimasukkan keranjang!`);
             }
             updateCartUI(); closeAddModal();
         }
@@ -390,7 +414,7 @@
             const item = cart[index];
             const newQty = item.quantity + delta;
             if (newQty > 0 && newQty <= item.maxStock) item.quantity = newQty;
-            else if (newQty > item.maxStock) showToast(`⚠️ Stok maksimal ${item.maxStock} Kg`, true);
+            else if (newQty > item.maxStock) showToast(`Stok maksimal ${item.maxStock} Kg`, true);
             updateCartUI();
         }
 
@@ -415,7 +439,7 @@
         }
 
         function openCartModal() {
-            if (!checkAuthState()) { showToast("🔒 Login dlu untuk melihat keranjang.", true); return openAuthModal(); }
+            if (!checkAuthState()) { showToast("Login dlu untuk melihat keranjang.", true); return openAuthModal(); }
             updateCartUI(); document.getElementById('cart-modal').classList.remove('hidden');
         }
         function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
@@ -424,7 +448,7 @@
         // PROSES PESANAN (MENGGUNAKAN NAMA ASLI DARI DB)
         // ==========================================
         async function processCheckout() {
-            if (cart.length === 0) return showToast("⚠️ Keranjang kosong!", true);
+            if (cart.length === 0) return showToast("Keranjang kosong!", true);
             const user = checkAuthState();
             const paymentMethod = document.getElementById('payment-method').value;
             
@@ -441,11 +465,42 @@
             try {
                 const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (response.status === 201) {
-                    showToast(`🎉 Pembayaran via ${paymentMethod} Berhasil!`);
+                    showToast(`Pembayaran via ${paymentMethod} Berhasil!`);
                     cart = []; closeCartModal(); setTimeout(() => window.location.reload(), 2000);
-                } else showToast("❌ Gagal membuat pesanan", true);
-            } catch (error) { showToast("❌ Terjadi kesalahan jaringan.", true); } 
+                } else showToast("Gagal membuat pesanan", true);
+            } catch (error) { showToast("Terjadi kesalahan jaringan.", true); } 
             finally { btn.innerText = "Proses Pesanan"; btn.disabled = false; }
+        }
+
+        // ==========================================
+        // FUNGSI PRODUCT DETAIL MODAL
+        // ==========================================
+        function showProductDetail(index) {
+            const product = window.marketProducts[index];
+            if (!product) return;
+            
+            document.getElementById('detail-modal-name').innerText = product.name;
+            document.getElementById('detail-modal-category').innerText = product.category || 'General';
+            document.getElementById('detail-modal-price').innerText = `Rp ${product.price.toLocaleString('id-ID')} / kg`;
+            document.getElementById('detail-modal-desc').innerText = product.description || 'Deskripsi tidak tersedia.';
+            document.getElementById('detail-modal-stock').innerText = `${product.stock} kg`;
+            
+            const user = checkAuthState();
+            const actionContainer = document.getElementById('detail-action-container');
+            
+            if (product.stock === 0) {
+                actionContainer.innerHTML = `<button disabled class="w-full bg-gray-400 text-white py-3 rounded-xl font-bold cursor-not-allowed">Habis Terjual</button>`;
+            } else if (!user) {
+                actionContainer.innerHTML = `<button onclick="closeProductDetail(); handleAddToCartClick()" class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-300 transition flex items-center justify-center gap-2">Login untuk Beli</button>`;
+            } else {
+                actionContainer.innerHTML = `<button onclick="closeProductDetail(); handleAddToCartClick('${product.id}', '${product.name}', ${product.price}, ${product.stock})" class="w-full bg-[#165B33] text-white font-bold py-3 rounded-xl hover:bg-[#0f4224] transition shadow-md">🛒 Masukkan ke Keranjang</button>`;
+            }
+            
+            document.getElementById('product-detail-modal').classList.remove('hidden');
+        }
+
+        function closeProductDetail() {
+            document.getElementById('product-detail-modal').classList.add('hidden');
         }
 
         // ==========================================
@@ -457,35 +512,65 @@
             
             try {
                 const response = await fetch('/api/products');
-                const products = await response.json();
+                let rawProducts = await response.json();
+                
+                // Filter out expired products & calculate daysLeft
+                let products = rawProducts.filter(p => {
+                    let expireDate;
+                    if (p.expireDate) {
+                        expireDate = new Date(p.expireDate);
+                    } else if (p.createdAt) {
+                        const inputDate = new Date(p.createdAt._seconds ? p.createdAt._seconds * 1000 : p.createdAt);
+                        expireDate = new Date(inputDate.getTime() + (7 * 24 * 60 * 60 * 1000));
+                    } else {
+                        return true; // No expiration data, keep it
+                    }
+
+                    const today = new Date();
+                    today.setHours(0,0,0,0);
+                    expireDate.setHours(0,0,0,0);
+                    const timeDiff = expireDate.getTime() - today.getTime();
+                    p.daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    return p.daysLeft >= 0; // Don't show expired
+                });
+
+                // Sort so Promo items (daysLeft <= 2) are at the front
+                products.sort((a, b) => {
+                    const aPromo = (a.daysLeft !== undefined && a.daysLeft <= 2) ? 1 : 0;
+                    const bPromo = (b.daysLeft !== undefined && b.daysLeft <= 2) ? 1 : 0;
+                    if (aPromo && !bPromo) return -1;
+                    if (!aPromo && bPromo) return 1;
+                    return 0;
+                });
+
+                window.marketProducts = products;
                 document.getElementById('total-products-count').innerText = `${products.length} Products Found`;
 
                 if (products.length === 0) { productGrid.innerHTML = '<p class="text-gray-500 col-span-full text-center">Belum ada hasil panen.</p>'; return; }
                 productGrid.innerHTML = ''; 
                 
-                products.forEach(product => {
-                    const isUrgent = product.stock > 0 && product.stock <= 10;
+                products.forEach((product, index) => {
+                    // Promo jika sisa hari <= 2
+                    const isPromo = product.daysLeft !== undefined && product.daysLeft <= 2;
                     const isOutOfStock = product.stock === 0;
                     const formattedPrice = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(product.price);
                     
-                    // Logika Penguncian Tombol:
-                    // Jika belum login, tombol bertuliskan "🔒 Login untuk Beli"
-                    // Jika sudah login, tombol menjadi "🛒 Add to Cart"
                     let actionBtn = isOutOfStock 
-                        ? `<button disabled class="mt-auto w-full bg-gray-400 text-white py-2.5 rounded-lg font-bold text-sm cursor-not-allowed">Habis Terjual</button>`
+                        ? `<button disabled onclick="event.stopPropagation()" class="mt-auto w-full bg-gray-400 text-white py-2.5 rounded-lg font-bold text-sm cursor-not-allowed">Habis Terjual</button>`
                         : !user 
-                            ? `<button onclick="handleAddToCartClick()" class="mt-auto w-full bg-gray-200 text-gray-700 py-2.5 rounded-lg font-bold text-sm hover:bg-gray-300 transition flex items-center justify-center gap-2">🔒 Login untuk Beli</button>`
-                            : `<button onclick="handleAddToCartClick('${product.id}', '${product.name}', ${product.price}, ${product.stock})" class="mt-auto w-full bg-[#165B33] hover:bg-[#0f4224] text-white py-2.5 rounded-lg font-bold text-sm transition shadow-md">🛒 Add to Cart</button>`;
+                            ? `<button onclick="event.stopPropagation(); handleAddToCartClick()" class="mt-auto w-full bg-gray-200 text-gray-700 py-2.5 rounded-lg font-bold text-sm hover:bg-gray-300 transition flex items-center justify-center gap-2">Login untuk Beli</button>`
+                            : `<button onclick="event.stopPropagation(); handleAddToCartClick('${product.id}', '${product.name}', ${product.price}, ${product.stock})" class="mt-auto w-full bg-[#165B33] hover:bg-[#0f4224] text-white py-2.5 rounded-lg font-bold text-sm transition shadow-md">🛒 Add to Cart</button>`;
 
                     productGrid.innerHTML += `
-                        <div class="bg-white rounded-2xl shadow-sm border ${isUrgent ? 'border-red-200 border-2' : 'border-gray-100'} overflow-hidden flex flex-col group relative ${isOutOfStock ? 'opacity-60 grayscale' : 'hover:shadow-lg transition'}">
-                            ${isOutOfStock ? `<div class="absolute inset-0 bg-white/50 z-20 flex items-center justify-center"><span class="bg-red-600 text-white font-black px-6 py-2 rounded-lg text-lg transform -rotate-12 border-2 border-white shadow-xl">HABIS</span></div>` : isUrgent ? `<div class="absolute top-6 -right-10 bg-red-600 text-white text-xs font-bold px-10 py-1 rotate-45 shadow-sm z-20">URGENT SALE</div>` : `<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm z-10">Featured</div>`}
+                        <div onclick="showProductDetail(${index})" class="cursor-pointer bg-white rounded-2xl shadow-sm border ${isPromo ? 'border-blue-200 border-2' : 'border-gray-100'} overflow-hidden flex flex-col group relative ${isOutOfStock ? 'opacity-60 grayscale' : 'hover:shadow-lg transition'}">
+                            ${isOutOfStock ? `<div class="absolute inset-0 bg-white/50 z-20 flex items-center justify-center"><span class="bg-red-600 text-white font-black px-6 py-2 rounded-lg text-lg transform -rotate-12 border-2 border-white shadow-xl">HABIS</span></div>` : isPromo ? `<div class="absolute top-6 -right-10 bg-blue-500 text-white text-xs font-bold px-10 py-1 rotate-45 shadow-sm z-20">PROMO </div>` : `<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm z-10">Featured</div>`}
                             <div class="w-full h-48 bg-gray-50 relative flex items-center justify-center overflow-hidden"><div class="text-6xl group-hover:scale-110 transition duration-500">📦</div></div>
                             <div class="p-5 flex-1 flex flex-col z-10 bg-white">
                                 <h3 class="font-bold text-gray-900 text-lg">${product.name}</h3>
-                                <p class="text-xs ${isUrgent ? 'text-red-600 font-bold' : 'text-gray-500'} mt-1">Sisa Stok: ${product.stock} kg</p>
+                                <p class="text-xs ${isPromo ? 'text-blue-600 font-bold' : 'text-gray-500'} mt-1">Sisa Stok: ${product.stock} kg</p>
                                 <div class="mt-4 flex justify-between items-end mb-5">
-                                    <p class="font-bold text-xl ${isUrgent ? 'text-red-600' : 'text-gray-900'}">${formattedPrice}<span class="text-xs font-normal">/kg</span></p>
+                                    <p class="font-bold text-xl ${isPromo ? 'text-blue-600' : 'text-gray-900'}">${formattedPrice}<span class="text-xs font-normal">/kg</span></p>
                                     <span class="text-[10px] text-gray-500 font-bold bg-gray-100 border border-gray-200 px-2 py-1 rounded-md truncate max-w-[80px]">${product.category || 'General'}</span>
                                 </div>
                                 ${actionBtn}

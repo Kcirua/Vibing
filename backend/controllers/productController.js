@@ -10,6 +10,8 @@ exports.createProduct = async (req, res) => {
             stock: req.body.stock,
             category: req.body.category,
             description: req.body.description,
+            harvestDate: req.body.harvestDate,
+            expireDate: req.body.expireDate,
             seller: req.body.seller,
             createdAt: new Date()
 
