@@ -5,124 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= locals.judul || 'AgriHub - B2B Marketplace' %></title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F9FAFB; }
-        .theme-green { color: #3b7b24; }
-        .bg-theme-green { background-color: #3b7b24; }
-        .hover-bg-theme-green:hover { background-color: #2f631c; }
-        /* Sembunyikan panah di input number */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .theme-green { color: #165B33; }
+        .bg-theme-green { background-color: #165B33; }
+        .hover-bg-theme-green:hover { background-color: #0f4224; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="text-gray-900 antialiased overflow-x-hidden min-h-screen flex flex-col relative">
 
-    <!-- NAVBAR (User Mode) -->
+    <!-- NAVBAR -->
     <nav class="absolute top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
         <div class="text-2xl font-bold text-white tracking-tight">AgriHub</div>
-        
         <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
             <a href="/" class="hover:text-white transition">Home</a>
             <a href="/marketplace" class="text-white border-b-2 border-green-400 pb-1">Marketplace</a>
-            <a href="/dashboard" class="hover:text-green-300 transition">Dashboard</a>
         </div>
-
-        <!-- AUTH & CART SECTION -->
         <div class="flex items-center gap-6">
-            <!-- Tombol Keranjang (Navbar) -->
-            <button onclick="openCartModal()" class="relative text-2xl hover:scale-110 transition cursor-pointer">
-                🛒
-                <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full hidden shadow-md">0</span>
-            </button>
-
+            <button onclick="openCartModal()" class="relative text-2xl hover:scale-110 transition cursor-pointer">🛒<span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full hidden shadow-md">0</span></button>
             <div class="flex items-center gap-3">
-                <div id="auth-section" class="flex items-center gap-3">
-                    <!-- Konten Auth diisi oleh JS -->
-                </div>
-                <div id="user-icon-container">
-                    <div class="w-10 h-10 bg-gray-500/50 rounded-full flex items-center justify-center font-bold shadow-inner text-xl">👤</div>
-                </div>
+                <div id="auth-section" class="flex items-center gap-3"></div>
+                <div id="user-icon-container"><div class="w-10 h-10 bg-gray-500/50 rounded-full flex items-center justify-center font-bold shadow-inner text-xl">👤</div></div>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="relative w-full h-[60vh] bg-cover bg-center flex items-center px-8 md:px-16" 
-            style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop');">
+    <header class="relative w-full h-[60vh] bg-cover bg-center flex items-center px-8 md:px-16" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop');">
         <div class="absolute inset-0 bg-black/40"></div>
-        
         <div class="relative z-10 max-w-7xl mx-auto w-full">
             <div class="max-w-2xl text-white">
-                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 px-4 py-1.5 rounded-full text-xs font-bold mb-4">
-                    <span class="w-2 h-2 bg-green-400 rounded-full"></span> Fresh & Local
-                </div>
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 shadow-sm">
-                    Fresh From Farm to Your Table
-                </h1>
-                <p class="text-lg md:text-xl text-gray-200 mb-8">
-                    Discover the finest organic produce from local farmers directly to your urban business.
-                </p>
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 px-4 py-1.5 rounded-full text-xs font-bold mb-4"><span class="w-2 h-2 bg-green-400 rounded-full"></span> Fresh & Local</div>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 shadow-sm">Fresh From Farm to Your Table</h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8">Discover the finest organic produce from local farmers directly to your urban business.</p>
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto w-full px-4 md:px-16 py-16 space-y-20">
-        
-        <!-- PRODUCT SECTION -->
         <section>
             <div class="mb-8 flex justify-between items-end">
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold mb-3 border border-green-200">
-                        ⭐ Live from Database
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-900">
-                        Our <span class="theme-green">Available Harvest</span>
-                    </h2>
+                    <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold mb-3 border border-green-200">⭐ Live from Database</div>
+                    <h2 class="text-3xl font-bold text-gray-900">Our <span class="theme-green">Available Harvest</span></h2>
                 </div>
                 <p id="total-products-count" class="text-sm font-bold text-gray-500"></p>
             </div>
-
-            <!-- PRODUCT GRID CONTAINER -->
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="col-span-full py-10 text-center">
-                    <div class="inline-block w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin mb-2"></div>
-                    <p class="text-gray-500 font-medium">Menarik data dari database...</p>
-                </div>
+                <div class="col-span-full py-10 text-center"><div class="inline-block w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin mb-2"></div><p class="text-gray-500 font-medium">Menarik data dari database...</p></div>
             </div>
         </section>
     </main>
 
-    <!-- ========================================== -->
-    <!-- FLOATING CART BUTTON (Pojok Kanan Bawah)   -->
-    <!-- ========================================== -->
-    <button onclick="openCartModal()" class="fixed bottom-8 right-8 z-[90] w-16 h-16 bg-theme-green text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:-translate-y-2 transition-all duration-300 cursor-pointer border-4 border-white">
-        <span class="text-3xl">🛒</span>
-        <!-- Badge untuk Floating Button -->
-        <span id="floating-cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full hidden border-2 border-white shadow-sm">0</span>
-    </button>
+    <button onclick="openCartModal()" class="fixed bottom-8 right-8 z-[90] w-16 h-16 bg-[#165B33] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:-translate-y-2 transition-all duration-300 cursor-pointer border-4 border-white"><span class="text-3xl">🛒</span><span id="floating-cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full hidden border-2 border-white shadow-sm">0</span></button>
+
+    <div id="toast-notification" class="fixed bottom-28 right-8 bg-white border-l-4 border-[#165B33] shadow-2xl rounded-lg p-4 z-[200] transform translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-3"><span id="toast-message" class="text-gray-800 font-semibold text-sm">Notifikasi</span></div>
 
     <!-- ========================================== -->
-    <!-- TOAST NOTIFICATION                         -->
+    <!-- MODAL AUTHENTICATION (SPLIT SCREEN DESAIN) -->
     <!-- ========================================== -->
-    <div id="toast-notification" class="fixed bottom-28 right-8 bg-white border-l-4 border-theme-green shadow-2xl rounded-lg p-4 z-[200] transform translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-3">
-        <span id="toast-message" class="text-gray-800 font-semibold text-sm">Notifikasi</span>
+    <div id="auth-modal" class="fixed inset-0 bg-[#EAB35E]/90 z-[150] hidden flex items-center justify-center backdrop-blur-sm p-4">
+        
+        <button onclick="closeAuthModal()" class="absolute top-6 right-8 text-white hover:text-red-900 text-5xl font-bold z-[160] transition">&times;</button>
+        
+        <!-- Kartu Utama -->
+        <div class="bg-white w-full max-w-5xl md:h-[600px] rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden relative z-10">
+            
+            <!-- Kiri: Area Form Dinamis -->
+            <div class="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-white relative">
+                
+                <div class="flex gap-3 mb-8">
+                    <div class="bg-white border border-gray-200 text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-blue-500 text-sm">▶</span> Google Play</div>
+                    <div class="bg-black border border-black text-white text-[10px] font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-sm"><span class="text-sm">🍏</span> App Store</div>
+                </div>
+
+                <!-- TAMPILAN LOGIN -->
+                <div id="form-login-ui">
+                    <p class="text-gray-500 font-medium mb-1">Welcome Buyer</p>
+                    <h1 class="text-4xl font-black text-gray-900 mb-8 tracking-tight">Log In</h1>
+
+                    <form onsubmit="attemptFakeLogin(event)">
+                        <div class="mb-5">
+                            <label class="block text-xs font-bold text-gray-700 mb-2">Your Email</label>
+                            <input type="email" id="login-email" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="your email">
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-xs font-bold text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <input type="password" id="login-password" required class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:border-[#165B33] transition" placeholder="your password">
+                                <span class="absolute right-4 top-3 text-gray-400 cursor-pointer">👁️</span>
+                            </div>
+                        </div>
+                        <div class="text-right mb-6">
+                            <a href="#" class="text-[11px] text-blue-500 hover:underline font-medium">Lupa kata sandi ?</a>
+                        </div>
+                        <button type="submit" id="btn-fake-login" class="w-full bg-[#165B33] text-white font-bold py-3.5 rounded-lg hover:bg-[#0f4224] transition shadow-md">
+                            Log In
+                        </button>
+                    </form>
+                    <p class="text-center text-xs text-gray-500 mt-6 font-medium">
+                        Don't have an account ? <button onclick="switchAuthTab('register')" class="text-[#165B33] font-bold hover:underline">Sign up</button>
+                    </p>
+                </div>
+
+                <!-- TAMPILAN REGISTER -->
+                <div id="form-register-ui" class="hidden">
+                    <p class="text-gray-500 font-medium mb-1">Join AgriHub</p>
+                    <h1 class="text-4xl font-black text-gray-900 mb-6 tracking-tight">Sign Up</h1>
+
+                    <form onsubmit="processRegister(event)" class="space-y-3">
+                        <div>
+                            <input type="text" id="reg-name" required placeholder="Nama Lengkap" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#165B33] text-sm">
+                        </div>
+                        <div>
+                            <input type="email" id="reg-email" required placeholder="Alamat Email" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#165B33] text-sm">
+                        </div>
+                        <div>
+                            <input type="number" id="reg-phone" required placeholder="Nomor WhatsApp" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#165B33] text-sm">
+                        </div>
+                        <div class="mb-2">
+                            <input type="password" id="reg-password" required placeholder="Password" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#165B33] text-sm">
+                        </div>
+                        <button type="submit" id="btn-register" class="w-full bg-[#165B33] text-white font-bold py-3.5 rounded-lg hover:bg-[#0f4224] transition shadow-md mt-2">
+                            Sign Up
+                        </button>
+                    </form>
+                    <p class="text-center text-xs text-gray-500 mt-5 font-medium">
+                        Already have an account ? <button onclick="switchAuthTab('login')" class="text-[#165B33] font-bold hover:underline">Log In</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kanan: Ilustrasi Hijau -->
+            <div class="hidden md:flex w-1/2 bg-[#165B33] flex-col items-center justify-center p-12 text-center relative overflow-hidden">
+                <div class="absolute -top-16 -left-16 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-green-900/40 rounded-full blur-3xl"></div>
+
+                <div class="absolute top-8 right-8 text-white text-right">
+                    <h2 class="text-2xl font-bold tracking-tight">AgriHub</h2>
+                    <p class="text-xs text-green-200 font-medium">( Marketplace )</p>
+                </div>
+
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/farmers-working-in-farm-4328221-3603126.png" alt="Farmers Illustration" class="w-4/5 object-contain mb-8 z-10 relative drop-shadow-2xl filter brightness-110">
+                
+                <h3 class="text-3xl font-bold text-white mb-3 z-10 relative">Get the best premium food</h3>
+                <p class="text-green-100 text-sm z-10 relative px-4 max-w-sm leading-relaxed">
+                    You can get the best premium food with the best price directly from local farmers only in HERE !
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL "TAMBAH KE KERANJANG" (Pilih Jumlah) -->
-    <!-- ========================================== -->
+
+    <!-- MODAL TAMBAH KE KERANJANG -->
     <div id="add-to-cart-modal" class="fixed inset-0 bg-black/60 z-[120] hidden flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl relative text-center">
             <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-green-100">🛒</div>
             <h3 id="add-modal-name" class="text-xl font-bold text-gray-900 mb-1">Nama Produk</h3>
             <p id="add-modal-price" class="text-theme-green font-bold text-lg mb-6">Rp 0 / kg</p>
-            
             <label class="block text-sm font-bold text-gray-500 mb-3">Tentukan Jumlah (Kg)</label>
             <div class="flex items-center justify-center gap-4 mb-2">
                 <button onclick="changeAddQty(-1)" class="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 font-black text-2xl text-gray-600 flex items-center justify-center transition shadow-inner">-</button>
@@ -130,7 +174,6 @@
                 <button onclick="changeAddQty(1)" class="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 font-black text-2xl text-gray-600 flex items-center justify-center transition shadow-inner">+</button>
             </div>
             <p id="add-modal-stock" class="text-xs font-bold text-gray-400 mb-8">Sisa stok: 0 kg</p>
-            
             <div class="flex gap-3">
                 <button onclick="closeAddModal()" class="flex-1 text-gray-500 font-bold py-3 hover:bg-gray-50 rounded-xl transition border border-gray-200">Batal</button>
                 <button onclick="confirmAddToCart()" class="flex-1 bg-theme-green text-white font-bold py-3 rounded-xl hover-bg-theme-green transition shadow-md">Masukkan</button>
@@ -138,86 +181,54 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL KERANJANG BELANJA (CART LIST)        -->
-    <!-- ========================================== -->
+    <!-- MODAL CHECKOUT CART -->
     <div id="cart-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl relative flex flex-col max-h-[85vh]">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-900">🛒 Checkout</h2>
                 <button onclick="closeCartModal()" class="text-gray-400 hover:text-red-500 font-bold text-2xl transition">&times;</button>
             </div>
-            
-            <div id="cart-items-container" class="overflow-y-auto flex-1 space-y-3 mb-2 py-2">
-                <p class="text-center text-gray-500 text-sm py-4">Keranjang Anda masih kosong.</p>
+            <div id="cart-items-container" class="overflow-y-auto flex-1 space-y-3 mb-2 py-2"></div>
+                        <div class="mt-2 pt-4 border-t border-gray-100">
+                <label class="block text-sm font-bold text-gray-700 mb-2">Lokasi Pengiriman</label>
+                <div class="bg-green-50/50 border border-green-100 rounded-xl p-3 flex items-start gap-3">
+                    <div class="text-xl mt-1">📍</div>
+                    <div>
+                        <h4 class="font-bold text-green-900 text-sm">Universitas Multimedia Nusantara</h4>
+                        <p class="text-xs text-green-700 mt-1">Jl. Scientia Boulevard, Gading Serpong, Tangerang, Banten</p>
+                        <p class="text-[10px] text-gray-500 mt-2 font-medium italic">*Pengiriman dibatasi area kampus untuk demonstrasi.</p>
+                    </div>
+                </div>
             </div>
-
-            <!-- METODE PEMBAYARAN -->
             <div class="mt-4 pt-4 border-t border-gray-100">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Metode Pembayaran</label>
                 <select id="payment-method" class="w-full border border-gray-300 rounded-xl p-3 outline-none focus:border-green-500 bg-gray-50 font-medium text-gray-700 shadow-sm cursor-pointer">
                     <option value="Transfer Bank (BCA)">🏦 Transfer Bank (BCA Virtual Account)</option>
-                    <option value="Transfer Bank (Mandiri)">🏦 Transfer Bank (Mandiri)</option>
                     <option value="GoPay / OVO">📱 e-Wallet (GoPay / OVO / Dana)</option>
                     <option value="COD (Bayar di Tempat)">🚚 COD (Bayar di Tempat)</option>
                 </select>
             </div>
-
             <div class="mt-4 pt-2">
                 <div class="flex justify-between items-center mb-4 bg-green-50 p-4 rounded-xl border border-green-100">
                     <span class="text-green-800 font-bold">Total Pembayaran:</span>
                     <span id="cart-total-price" class="text-2xl font-black text-gray-900">Rp 0</span>
                 </div>
-                <button onclick="processCheckout()" class="w-full bg-theme-green text-white font-bold py-3.5 rounded-xl hover-bg-theme-green transition shadow-lg text-lg">
-                    Proses Pesanan
-                </button>
+                <button onclick="processCheckout()" class="w-full bg-[#165B33] text-white font-bold py-3.5 rounded-xl hover:bg-[#0f4224] transition shadow-lg text-lg">Proses Pesanan</button>
             </div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- LOGIN MODAL (Untuk User/Pembeli)           -->
-    <!-- ========================================== -->
-    <div id="login-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm px-4">
-        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Masuk / Daftar</h2>
-            <p class="text-sm text-gray-500 mb-6">Masukkan data diri Anda untuk mulai memesan hasil panen segar.</p>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-bold text-gray-700 mb-2">Nama Restoran / Pembeli</label>
-                <input type="text" id="buyer-name" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="Cth: Budi (Warung Sederhana)">
-            </div>
-            <div class="mb-6">
-                <label class="block text-sm font-bold text-gray-700 mb-2">Nomor WhatsApp Aktif</label>
-                <input type="number" id="buyer-phone" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="Cth: 08123456789">
-            </div>
-
-            <div class="flex justify-end gap-3">
-                <button onclick="closeLoginModal()" class="text-gray-500 font-bold px-5 py-2.5 hover:bg-gray-50 rounded-lg transition border border-gray-200">Batal</button>
-                <button onclick="processLogin()" class="bg-theme-green text-white font-bold px-6 py-2.5 rounded-lg hover-bg-theme-green transition shadow-md">Masuk</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT UTAMA: FETCH API, CART, DAN TOAST -->
     <script>
         let cart = [];
         let tempProduct = null; 
 
-        // ==========================================
-        // FUNGSI TOAST NOTIFICATION 
-        // ==========================================
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast-notification');
-            const toastMsg = document.getElementById('toast-message');
-            toastMsg.innerText = message;
-            
+            document.getElementById('toast-message').innerText = message;
             if(isError) toast.classList.replace('border-theme-green', 'border-red-500');
             else toast.classList.replace('border-red-500', 'border-theme-green');
-
             toast.classList.remove('translate-y-32', 'opacity-0');
             toast.classList.add('translate-y-0', 'opacity-100');
-            
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-32', 'opacity-0');
@@ -225,54 +236,119 @@
         }
 
         // ==========================================
-        // LOGIKA AUTH (USER)
+        // LOGIKA AUTHENTICATION UI
         // ==========================================
+        function checkAuthState() {
+            const savedUserStr = localStorage.getItem('agrihub_user');
+            return savedUserStr ? JSON.parse(savedUserStr) : null;
+        }
+
         function renderAuthUI() {
             const authSection = document.getElementById('auth-section');
             const userIcon = document.getElementById('user-icon-container');
-            const savedUserStr = localStorage.getItem('agrihub_user');
+            const user = checkAuthState();
 
-            if (savedUserStr) {
-                const user = JSON.parse(savedUserStr);
+            if (user) {
                 authSection.innerHTML = `
                     <div class="text-right hidden md:block">
                         <p class="text-sm text-white font-bold">${user.name}</p>
-                        <button onclick="logout()" class="text-xs text-red-300 font-medium hover:text-red-100 transition">Ganti Akun</button>
-                    </div>
-                `;
+                        <button onclick="logout()" class="text-xs text-red-300 font-medium hover:text-red-100 transition">Logout</button>
+                    </div>`;
                 userIcon.innerHTML = `<div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shadow-md text-xl">👤</div>`;
             } else {
-                authSection.innerHTML = `
-                    <button onclick="openLoginModal()" class="bg-white text-green-900 text-sm font-bold px-5 py-2 rounded-full shadow hover:bg-gray-100 transition">Masuk / Daftar</button>
-                `;
+                authSection.innerHTML = `<button onclick="openAuthModal()" class="bg-white text-green-900 text-sm font-bold px-5 py-2 rounded-full shadow hover:bg-gray-100 transition">Masuk / Daftar</button>`;
                 userIcon.innerHTML = `<div class="w-10 h-10 bg-gray-500/50 rounded-full flex items-center justify-center font-bold opacity-70 text-xl">👤</div>`;
             }
         }
 
-        function openLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
-        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
+        function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
         
-        function processLogin() {
-            const nameInput = document.getElementById('buyer-name').value;
-            const phoneInput = document.getElementById('buyer-phone').value;
-            if (!nameInput || !phoneInput) return showToast("⚠️ Tolong isi Nama dan No WhatsApp!", true);
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('form-login-ui');
+            const registerForm = document.getElementById('form-register-ui');
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        // SIMULASI LOGIN KARENA BACKEND BELUM ADA API LOGIN
+        function attemptFakeLogin(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('login-email').value;
+            const pwdInput = document.getElementById('login-password').value;
+            const btn = document.getElementById('btn-fake-login');
             
-            localStorage.setItem('agrihub_user', JSON.stringify({ name: nameInput, phone: phoneInput }));
-            closeLoginModal();
-            renderAuthUI();
-            showToast(`✅ Selamat datang, ${nameInput}!`);
+            btn.innerText = "Mengecek Kredensial...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const fakeName = emailInput.split('@')[0];
+                localStorage.setItem('agrihub_user', JSON.stringify({ name: fakeName, email: emailInput, phone: "08123456789" }));
+                closeAuthModal();
+                renderAuthUI();
+                loadProductsGrid(); 
+                showToast(`✅ Selamat datang kembali, ${fakeName}!`);
+                btn.innerText = "Log In";
+                btn.disabled = false;
+            }, 1000);
+        }
+
+        // REGISTER AKTIF KE BACKEND API
+        async function processRegister(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-register');
+            btn.innerText = "Memproses...";
+            btn.disabled = true;
+
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const phone = document.getElementById('reg-phone').value;
+            const password = document.getElementById('reg-password').value;
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password, role: 'buyer' })
+                });
+                const result = await response.json();
+
+                if (response.status === 201) {
+                    showToast(`✅ Registrasi berhasil!`);
+                    localStorage.setItem('agrihub_user', JSON.stringify({ uid: result.uid, name, email, phone }));
+                    closeAuthModal();
+                    renderAuthUI();
+                    loadProductsGrid();
+                } else {
+                    showToast("❌ Registrasi gagal: " + (result.message || result.error), true);
+                }
+            } catch (error) {
+                showToast("❌ Terjadi kesalahan jaringan.", true);
+            } finally {
+                btn.innerText = "Sign Up";
+                btn.disabled = false;
+            }
         }
 
         function logout() {
             localStorage.removeItem('agrihub_user');
-            renderAuthUI();
+            cart = []; updateCartUI(); renderAuthUI(); loadProductsGrid(); 
             showToast("👋 Anda telah keluar.");
         }
 
         // ==========================================
-        // LOGIKA POP-UP ADD TO CART
+        // LOGIKA KERANJANG & CHECKOUT
         // ==========================================
-        function openAddModal(id, name, price, maxStock) {
+        function handleAddToCartClick(id, name, price, maxStock) {
+            if (!checkAuthState()) {
+                showToast("🔒 Anda harus Login/Daftar terlebih dahulu untuk berbelanja.", true);
+                return openAuthModal();
+            }
             tempProduct = { id, name, price, maxStock };
             document.getElementById('add-modal-name').innerText = name;
             document.getElementById('add-modal-price').innerText = `Rp ${price.toLocaleString('id-ID')} / Kg`;
@@ -281,236 +357,143 @@
             document.getElementById('add-to-cart-modal').classList.remove('hidden');
         }
 
-        function closeAddModal() {
-            document.getElementById('add-to-cart-modal').classList.add('hidden');
-            tempProduct = null;
-        }
+        function closeAddModal() { document.getElementById('add-to-cart-modal').classList.add('hidden'); tempProduct = null; }
 
         function changeAddQty(delta) {
-            const input = document.getElementById('add-qty');
-            let val = parseInt(input.value) + delta;
-            
+            let val = parseInt(document.getElementById('add-qty').value) + delta;
             if (val < 1) val = 1;
-            if (val > tempProduct.maxStock) {
-                val = tempProduct.maxStock;
-                showToast(`⚠️ Stok maksimal hanya ${tempProduct.maxStock} kg`, true);
-            }
-            input.value = val;
+            if (val > tempProduct.maxStock) { val = tempProduct.maxStock; showToast(`⚠️ Maksimal ${tempProduct.maxStock} kg`, true); }
+            document.getElementById('add-qty').value = val;
         }
 
         function confirmAddToCart() {
             const qty = parseInt(document.getElementById('add-qty').value);
             const existingItem = cart.find(item => item.productId === tempProduct.id);
-            
             if (existingItem) {
                 if (existingItem.quantity + qty <= tempProduct.maxStock) {
-                    existingItem.quantity += qty;
-                    showToast(`✅ Ditambahkan ${qty} kg lagi ke keranjang!`);
-                } else {
-                    showToast(`⚠️ Total di keranjang melebihi stok!`, true);
-                    return;
-                }
+                    existingItem.quantity += qty; showToast(`✅ Ditambahkan lagi ke keranjang!`);
+                } else return showToast(`⚠️ Melebihi batas stok!`, true);
             } else {
-                cart.push({ productId: tempProduct.id, name: tempProduct.name, price: tempProduct.price, quantity: qty, maxStock: tempProduct.maxStock });
-                showToast(`✅ Berhasil memasukkan ${qty} kg ${tempProduct.name}!`);
+                cart.push({ ...tempProduct, quantity: qty }); showToast(`✅ ${tempProduct.name} dimasukkan keranjang!`);
             }
-            
-            updateCartUI();
-            closeAddModal();
+            updateCartUI(); closeAddModal();
         }
 
-        // ==========================================
-        // LOGIKA KERANJANG (CART LIST)
-        // ==========================================
-        function removeCartItem(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
+        function removeCartItem(index) { cart.splice(index, 1); updateCartUI(); }
 
         function updateQuantityInCart(index, delta) {
             const item = cart[index];
             const newQty = item.quantity + delta;
-            if (newQty > 0 && newQty <= item.maxStock) {
-                item.quantity = newQty;
-            } else if (newQty > item.maxStock) {
-                showToast(`⚠️ Stok maksimal hanya ${item.maxStock} Kg`, true);
-            }
+            if (newQty > 0 && newQty <= item.maxStock) item.quantity = newQty;
+            else if (newQty > item.maxStock) showToast(`⚠️ Stok maksimal ${item.maxStock} Kg`, true);
             updateCartUI();
         }
 
         function updateCartUI() {
-            const badgeNav = document.getElementById('cart-badge');
-            const badgeFloat = document.getElementById('floating-cart-badge'); // Badge untuk Floating Button
-            
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            if(totalItems > 0) {
-                badgeNav.innerText = totalItems;
-                badgeFloat.innerText = totalItems;
-                badgeNav.classList.remove('hidden');
-                badgeFloat.classList.remove('hidden');
-            } else {
-                badgeNav.classList.add('hidden');
-                badgeFloat.classList.add('hidden');
-            }
+            ['cart-badge', 'floating-cart-badge'].forEach(id => {
+                const el = document.getElementById(id);
+                if(totalItems > 0) { el.innerText = totalItems; el.classList.remove('hidden'); } 
+                else el.classList.add('hidden');
+            });
 
             const container = document.getElementById('cart-items-container');
             if (cart.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-500 text-sm py-4">Keranjang Anda masih kosong.</p>';
+                container.innerHTML = '<p class="text-center text-gray-500 text-sm py-4">Keranjang kosong.</p>';
                 document.getElementById('cart-total-price').innerText = 'Rp 0';
                 return;
             }
 
-            let html = '';
-            let totalPrice = 0;
-
+            let html = ''; let totalPrice = 0;
             cart.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                totalPrice += itemTotal;
-                
+                totalPrice += item.price * item.quantity;
                 html += `
                     <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <div class="flex-1">
-                            <h4 class="font-bold text-gray-800 text-sm">${item.name}</h4>
-                            <p class="text-xs text-gray-500 font-medium">Rp ${item.price.toLocaleString('id-ID')} / Kg</p>
-                        </div>
+                        <div class="flex-1"><h4 class="font-bold text-gray-800 text-sm">${item.name}</h4><p class="text-xs text-gray-500">Rp ${item.price.toLocaleString('id-ID')}/Kg</p></div>
                         <div class="flex items-center gap-3">
                             <div class="flex items-center bg-white border border-gray-200 rounded-lg text-sm shadow-sm overflow-hidden">
-                                <button onclick="updateQuantityInCart(${index}, -1)" class="w-8 h-8 font-bold text-gray-600 hover:bg-gray-100 transition">-</button>
+                                <button onclick="updateQuantityInCart(${index}, -1)" class="w-8 h-8 font-bold text-gray-600 hover:bg-gray-100">-</button>
                                 <span class="w-8 text-center font-bold text-gray-900">${item.quantity}</span>
-                                <button onclick="updateQuantityInCart(${index}, 1)" class="w-8 h-8 font-bold text-gray-600 hover:bg-gray-100 transition">+</button>
+                                <button onclick="updateQuantityInCart(${index}, 1)" class="w-8 h-8 font-bold text-gray-600 hover:bg-gray-100">+</button>
                             </div>
-                            <button onclick="removeCartItem(${index})" class="text-red-400 hover:text-red-600 font-bold ml-1 text-lg transition">🗑️</button>
+                            <button onclick="removeCartItem(${index})" class="text-red-400 hover:text-red-600 font-bold ml-1 text-lg">🗑️</button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-            
             container.innerHTML = html;
             document.getElementById('cart-total-price').innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
         }
 
         function openCartModal() {
-            updateCartUI();
-            document.getElementById('cart-modal').classList.remove('hidden');
+            if (!checkAuthState()) { showToast("🔒 Login dlu untuk melihat keranjang.", true); return openAuthModal(); }
+            updateCartUI(); document.getElementById('cart-modal').classList.remove('hidden');
         }
         function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
 
-        // ==========================================
-        // LOGIKA CHECKOUT KE BACKEND
-        // ==========================================
         async function processCheckout() {
-            if (cart.length === 0) return showToast("⚠️ Keranjang belanja masih kosong!", true);
-
-            const savedUserStr = localStorage.getItem('agrihub_user');
-            if (!savedUserStr) {
-                showToast("⚠️ Anda harus Login / Daftar terlebih dahulu.", true);
-                closeCartModal();
-                return openLoginModal(); 
-            }
-
-            // Ambil metode pembayaran yang dipilih
+            if (cart.length === 0) return showToast("⚠️ Keranjang kosong!", true);
+            const user = checkAuthState();
             const paymentMethod = document.getElementById('payment-method').value;
-
-            const user = JSON.parse(savedUserStr);
-            const payload = {
-                buyerName: user.name,
-                buyerPhone: user.phone,
-                paymentMethod: paymentMethod, // Data tambahan untuk ilusi lengkap
-                items: cart.map(item => ({
-                    productId: item.productId,
-                    quantity: item.quantity
-                }))
-            };
+            const payload = { buyerName: user.name, buyerPhone: user.phone, items: cart.map(i => ({ productId: i.productId, quantity: i.quantity })) };
 
             const btn = document.querySelector('button[onclick="processCheckout()"]');
-            const originalText = btn.innerText;
-            btn.innerText = "Memproses Pembayaran...";
-            btn.disabled = true;
+            btn.innerText = "Memproses..."; btn.disabled = true;
 
             try {
-                const response = await fetch('/api/orders', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                const result = await response.json();
-
+                const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (response.status === 201) {
                     showToast(`🎉 Pembayaran via ${paymentMethod} Berhasil!`);
-                    cart = []; 
-                    closeCartModal();
-                    
-                    setTimeout(() => { window.location.reload(); }, 2000);
-                } else {
-                    showToast("❌ Gagal: " + (result.message || result.error), true);
-                }
-            } catch (error) {
-                showToast("❌ Terjadi kesalahan jaringan server.", true);
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+                    cart = []; closeCartModal(); setTimeout(() => window.location.reload(), 2000);
+                } else showToast("❌ Gagal membuat pesanan", true);
+            } catch (error) { showToast("❌ Terjadi kesalahan jaringan.", true); } 
+            finally { btn.innerText = "Proses Pesanan"; btn.disabled = false; }
         }
 
         // ==========================================
-        // FETCH PRODUK DATABASE SAAT HALAMAN DIMUAT
+        // FETCH DATA PRODUK
         // ==========================================
-        document.addEventListener("DOMContentLoaded", async () => {
-            renderAuthUI(); 
+        async function loadProductsGrid() {
             const productGrid = document.getElementById('product-grid');
-            const countLabel = document.getElementById('total-products-count');
+            const user = checkAuthState();
 
             try {
                 const response = await fetch('/api/products');
                 const products = await response.json();
-
-                productGrid.innerHTML = ''; 
-                countLabel.innerText = `${products.length} Products Found`;
+                document.getElementById('total-products-count').innerText = `${products.length} Products Found`;
 
                 if (products.length === 0) {
-                    productGrid.innerHTML = '<p class="text-gray-500 col-span-full text-center font-medium">Belum ada hasil panen yang dijual di database.</p>';
-                    return;
+                    productGrid.innerHTML = '<p class="text-gray-500 col-span-full text-center">Belum ada hasil panen.</p>'; return;
                 }
 
+                productGrid.innerHTML = ''; 
                 products.forEach(product => {
                     const isUrgent = product.stock > 0 && product.stock <= 10;
                     const isOutOfStock = product.stock === 0;
-                    
                     const formattedPrice = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(product.price);
-                    const originalPrice = isUrgent ? new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(product.price * 2) : '';
+                    
+                    let actionBtn = isOutOfStock ? `<button disabled class="mt-auto w-full bg-gray-400 text-white py-2.5 rounded-lg font-bold text-sm">Habis Terjual</button>`
+                        : !user ? `<button onclick="handleAddToCartClick()" class="mt-auto w-full bg-gray-200 text-gray-700 py-2.5 rounded-lg font-bold text-sm hover:bg-gray-300 transition">🔒 Login untuk Beli</button>`
+                        : `<button onclick="handleAddToCartClick('${product.id}', '${product.name}', ${product.price}, ${product.stock})" class="mt-auto w-full bg-theme-green hover-bg-theme-green text-white py-2.5 rounded-lg font-bold text-sm transition shadow-md">🛒 Add to Cart</button>`;
 
-                    const actionButtonHtml = isOutOfStock 
-                        ? `<button disabled class="mt-auto w-full bg-gray-400 text-white py-2.5 rounded-lg font-bold text-sm cursor-not-allowed">Habis Terjual</button>`
-                        : `<button onclick="openAddModal('${product.id}', '${product.name}', ${product.price}, ${product.stock})" class="mt-auto w-full bg-theme-green hover-bg-theme-green text-white py-2.5 rounded-lg font-bold text-sm transition shadow-md flex items-center justify-center gap-2">🛒 Add to Cart</button>`;
-
-                    const cardHtml = `
+                    productGrid.innerHTML += `
                         <div class="bg-white rounded-2xl shadow-sm border ${isUrgent ? 'border-red-200 border-2' : 'border-gray-100'} overflow-hidden flex flex-col group relative ${isOutOfStock ? 'opacity-60 grayscale' : 'hover:shadow-lg transition'}">
                             ${isOutOfStock ? `<div class="absolute inset-0 bg-white/50 z-20 flex items-center justify-center"><span class="bg-red-600 text-white font-black px-6 py-2 rounded-lg text-lg transform -rotate-12 border-2 border-white shadow-xl">HABIS</span></div>` : isUrgent ? `<div class="absolute top-6 -right-10 bg-red-600 text-white text-xs font-bold px-10 py-1 rotate-45 shadow-sm z-20">URGENT SALE</div>` : `<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm z-10">Featured</div>`}
-                            <div class="w-full h-48 bg-gray-50 relative flex items-center justify-center overflow-hidden">
-                                <div class="text-6xl group-hover:scale-110 transition duration-500">📦</div>
-                            </div>
+                            <div class="w-full h-48 bg-gray-50 relative flex items-center justify-center overflow-hidden"><div class="text-6xl group-hover:scale-110 transition duration-500">📦</div></div>
                             <div class="p-5 flex-1 flex flex-col z-10 bg-white">
                                 <h3 class="font-bold text-gray-900 text-lg">${product.name}</h3>
                                 <p class="text-xs ${isUrgent ? 'text-red-600 font-bold' : 'text-gray-500'} mt-1">Sisa Stok: ${product.stock} kg</p>
                                 <div class="mt-4 flex justify-between items-end mb-5">
-                                    <div>
-                                        ${isUrgent ? `<p class="text-xs text-gray-400 line-through">${originalPrice}</p>` : ''}
-                                        <p class="font-bold text-xl ${isUrgent ? 'text-red-600' : 'text-gray-900'}">${formattedPrice}<span class="text-xs font-normal ${isUrgent ? 'text-red-400' : 'text-gray-500'}">/kg</span></p>
-                                    </div>
+                                    <p class="font-bold text-xl ${isUrgent ? 'text-red-600' : 'text-gray-900'}">${formattedPrice}<span class="text-xs font-normal">/kg</span></p>
                                     <span class="text-[10px] text-gray-500 font-bold bg-gray-100 border border-gray-200 px-2 py-1 rounded-md truncate max-w-[80px]">${product.category || 'General'}</span>
                                 </div>
-                                ${actionButtonHtml}
+                                ${actionBtn}
                             </div>
-                        </div>
-                    `;
-                    productGrid.innerHTML += cardHtml;
+                        </div>`;
                 });
-            } catch (error) {
-                productGrid.innerHTML = '<p class="text-red-500 col-span-full text-center font-bold">Gagal mengambil data dari server.</p>';
-            }
-        });
+            } catch (error) { productGrid.innerHTML = '<p class="text-red-500 col-span-full text-center font-bold">Gagal mengambil data.</p>'; }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => { renderAuthUI(); loadProductsGrid(); });
     </script>
 </body>
 </html>
