@@ -10,7 +10,7 @@ router.get("/", productController.getProducts);
 
 router.get("/:id", productController.getProduct);
 
-router.post("/", verifyToken, productController.createProduct);
+router.post("/", productController.createProduct);
 
 router.put("/:id", productController.updateProduct);
 
